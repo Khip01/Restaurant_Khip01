@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "restaurant_desktop-app/1.0.0": {
+        "runtime": {
+          "restaurant_desktop-app.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "restaurant_desktop-app/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
