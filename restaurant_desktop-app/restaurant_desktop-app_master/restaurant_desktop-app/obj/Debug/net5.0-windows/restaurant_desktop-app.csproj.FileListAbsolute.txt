@@ -21,3 +21,5 @@ C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_deskto
 C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.PageDelete.resources
 C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.PageUpdate.resources
 C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.PageAllMenu.resources
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop-app.csproj.CopyComplete

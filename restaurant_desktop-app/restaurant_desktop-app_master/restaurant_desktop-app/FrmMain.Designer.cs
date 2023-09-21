@@ -143,10 +143,10 @@ namespace restaurant_desktop_app
             this.pnlAboutPop.Controls.Add(this.label3);
             this.pnlAboutPop.Controls.Add(this.label2);
             this.pnlAboutPop.Controls.Add(this.label1);
-            this.pnlAboutPop.Location = new System.Drawing.Point(10, 438);
+            this.pnlAboutPop.Location = new System.Drawing.Point(10, 481);
             this.pnlAboutPop.MaximumSize = new System.Drawing.Size(230, 147);
             this.pnlAboutPop.Name = "pnlAboutPop";
-            this.pnlAboutPop.Size = new System.Drawing.Size(230, 44);
+            this.pnlAboutPop.Size = new System.Drawing.Size(230, 0);
             this.pnlAboutPop.TabIndex = 4;
             this.pnlAboutPop.Visible = false;
             // 
