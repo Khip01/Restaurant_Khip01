@@ -13,16 +13,17 @@ Create Simple RESTful API with GO, Complete with simple Mobile and Desktop App
 
 The operating system I use: Windows 11\
 Required Software:
-- [x] API (Go/Gin,Gorm)
+
+- [x]  **[&nbsp;&nbsp;&nbsp;&nbsp;DONE&nbsp;&nbsp;&nbsp;&nbsp;]** API (Go/Gin,Gorm)
     - ```go``` command installed on terminal ```(go1.20.7)```
     - Visual Studio Code
     - Go Extexsion *optional
-- [ ] Desktop App (C#) **[ON GOING]**
+- [ ] **[ON GOING]** Desktop App (C#) 
     - Visual Studio 2019
-- [ ] Mobile App (Dart/Flutter) **[ON GOING]**
+- [ ] **[ON GOING]** Mobile App (Dart/Flutter) 
     - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
     - Flutter Extension *optional
-- [x] Database (SqlServer) 
+- [x] **[&nbsp;&nbsp;&nbsp;&nbsp;DONE&nbsp;&nbsp;&nbsp;&nbsp;]** Database (SqlServer) 
     - SQL Server Management Studio 18
     - Other? (maybe in future i'll add mariaDb(mysql), if I'm free, lol)
 - Postman
