@@ -15,30 +15,7 @@ namespace restaurant_desktop_app
 {
     public partial class PageAllMenu : Form
     {
-        private async Task<MenuResponse> GetMenuDataAsync()
-        {
-            MenuResponse menuResponse = new MenuResponse();
-
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync("http://localhost:8081/api/Menus");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string json = await response.Content.ReadAsStringAsync();
-                        menuResponse = JsonConvert.DeserializeObject<MenuResponse>(json);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Tangani kesalahan jika terjadi
-                    MessageBox.Show("Error: " + ex.Message);
-                }
-            }
-
-            return menuResponse;
-        }
+        Controller controller = new Controller();
 
         public PageAllMenu()
         {
@@ -47,45 +24,41 @@ namespace restaurant_desktop_app
 
         private async void PageAllMenu_Load(object sender, EventArgs e)
         {
-            // Mengambil Object All Menu dan menggunakannya di datasource
-            MenuResponse menuResponse = await GetMenuDataAsync();
+            // Take the All Menu Object and use it in the datasource
+            MenuResponse menuResponse = await controller.GetMenusDataAsync();
             dgvMenu.DataSource = menuResponse.AllMenu;
 
-            // Mengatur nama kolom untuk ID
-            dgvMenu.Columns["Id"].HeaderText = "ID";
+            if (dgvMenu.Rows.Count >= 1)
+            {
+                // Set the name column to ID
+                dgvMenu.Columns["Id"].HeaderText = "ID";
 
-            // Mengatur nama kolom untuk Name (MENU NAME)
-            dgvMenu.Columns["MenuName"].HeaderText = "MENU NAME";
+                // Set the name column to MENU NAME
+                dgvMenu.Columns["MenuName"].HeaderText = "MENU NAME";
 
-            // Mengatur nama kolom untuk Description
-            dgvMenu.Columns["Description"].HeaderText = "DESCRIPTION";
+                // Set the name column to Description
+                dgvMenu.Columns["Description"].HeaderText = "DESCRIPTION";
 
-            // Mengatur nama kolom untuk Price
-            dgvMenu.Columns["Price"].HeaderText = "PRICE";
-
+                // Set the name column to PRICE
+                dgvMenu.Columns["Price"].HeaderText = "PRICE";
+            }
         }
-    }
 
-    // Menu Class inside the All Menu Array
-    public class MenuResponse
-    {
-        [JsonProperty ("All Menu")]
-        public List<Menu> AllMenu { get; set; }
-    }
+        private async void dgvMenu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Take ID from the selected row
+            int row = dgvMenu.CurrentCell.RowIndex;
 
-    // Class JSON as Menu
-    public class Menu
-    {
-        [JsonProperty ("id")]
-        public int Id { get; set; }
+            int id = Convert.ToInt32(dgvMenu.Rows[row].Cells[0].Value);
 
-        [JsonProperty ("menu_name")]
-        public string MenuName { get; set; }
+            // Take the Menu Object and use it
+            MenuWrapper menuWrap = await controller.GetMenuDataAsync(id);
 
-        [JsonProperty ("description")]
-        public string Description { get; set; }
-
-        [JsonProperty ("price")]
-        public int Price { get; set; }
+            // Set the result
+            lblId.Text = "ID: " + menuWrap.Menu.Id.ToString();
+            lblMenuName.Text = "Menu Name: " + menuWrap.Menu.MenuName;
+            lblDescription.Text = "Description: " + menuWrap.Menu.Description;
+            lblPrice.Text = "Price: Rp." + menuWrap.Menu.Price.ToString();
+        }
     }
 }
