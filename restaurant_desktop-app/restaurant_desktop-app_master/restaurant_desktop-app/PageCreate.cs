@@ -48,7 +48,7 @@ namespace restaurant_desktop_app
             txtPrice.Clear();
         }
 
-        private async void btnUpdate_Click(object sender, EventArgs e)
+        private async void btnCreate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtMenuName.Text) || string.IsNullOrEmpty(txtPrice.Text))
             {

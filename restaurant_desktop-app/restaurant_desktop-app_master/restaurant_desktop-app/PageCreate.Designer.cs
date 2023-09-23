@@ -46,7 +46,7 @@ namespace restaurant_desktop_app
             this.lblId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.timerErrorField = new System.Windows.Forms.Timer(this.components);
             this.timerErrorNumber = new System.Windows.Forms.Timer(this.components);
@@ -242,20 +242,20 @@ namespace restaurant_desktop_app
             this.label4.TabIndex = 11;
             this.label4.Text = "localhost:8081/api/Menu (with body JSON)";
             // 
-            // btnUpdate
+            // btnCreate
             // 
-            this.btnUpdate.BackColor = System.Drawing.Color.Gold;
-            this.btnUpdate.FlatAppearance.BorderSize = 0;
-            this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnUpdate.Location = new System.Drawing.Point(338, 611);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(10);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(169, 46);
-            this.btnUpdate.TabIndex = 13;
-            this.btnUpdate.Text = "Create";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.btnCreate.BackColor = System.Drawing.Color.Gold;
+            this.btnCreate.FlatAppearance.BorderSize = 0;
+            this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCreate.Location = new System.Drawing.Point(338, 611);
+            this.btnCreate.Margin = new System.Windows.Forms.Padding(10);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(169, 46);
+            this.btnCreate.TabIndex = 13;
+            this.btnCreate.Text = "Create";
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // btnClear
             // 
@@ -288,7 +288,7 @@ namespace restaurant_desktop_app
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(854, 676);
             this.Controls.Add(this.btnClear);
-            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnlDgv);
             this.Controls.Add(this.lblTitle);
@@ -325,7 +325,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.TextBox txtMenuName;
         private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Timer timerErrorField;
         private System.Windows.Forms.Timer timerErrorNumber;
