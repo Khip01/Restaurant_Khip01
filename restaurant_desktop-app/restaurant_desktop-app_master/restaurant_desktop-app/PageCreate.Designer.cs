@@ -29,6 +29,7 @@ namespace restaurant_desktop_app
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlDgv = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +48,8 @@ namespace restaurant_desktop_app
             this.label4 = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.timerErrorField = new System.Windows.Forms.Timer(this.components);
+            this.timerErrorNumber = new System.Windows.Forms.Timer(this.components);
             this.pnlDgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).BeginInit();
             this.panel1.SuspendLayout();
@@ -149,6 +152,7 @@ namespace restaurant_desktop_app
             // 
             // txtMenuName
             // 
+            this.txtMenuName.BackColor = System.Drawing.SystemColors.Window;
             this.txtMenuName.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtMenuName.Location = new System.Drawing.Point(182, 102);
             this.txtMenuName.Name = "txtMenuName";
@@ -243,7 +247,7 @@ namespace restaurant_desktop_app
             this.btnUpdate.BackColor = System.Drawing.Color.Gold;
             this.btnUpdate.FlatAppearance.BorderSize = 0;
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnUpdate.Location = new System.Drawing.Point(338, 611);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(10);
             this.btnUpdate.Name = "btnUpdate";
@@ -251,13 +255,14 @@ namespace restaurant_desktop_app
             this.btnUpdate.TabIndex = 13;
             this.btnUpdate.Text = "Create";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnClear
             // 
             this.btnClear.BackColor = System.Drawing.Color.IndianRed;
             this.btnClear.FlatAppearance.BorderSize = 0;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnClear.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnClear.ForeColor = System.Drawing.SystemColors.Control;
             this.btnClear.Location = new System.Drawing.Point(666, 611);
             this.btnClear.Margin = new System.Windows.Forms.Padding(10);
@@ -267,6 +272,14 @@ namespace restaurant_desktop_app
             this.btnClear.Text = "Clear All Field";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // timerErrorField
+            // 
+            this.timerErrorField.Tick += new System.EventHandler(this.timerErrorField_Tick);
+            // 
+            // timerErrorNumber
+            // 
+            this.timerErrorNumber.Tick += new System.EventHandler(this.timerErrorNumber_Tick);
             // 
             // PageCreate
             // 
@@ -314,5 +327,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Timer timerErrorField;
+        private System.Windows.Forms.Timer timerErrorNumber;
     }
 }

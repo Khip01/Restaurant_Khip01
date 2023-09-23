@@ -14,6 +14,7 @@ namespace restaurant_desktop_app
         // Get All Menus
         public async Task<MenuResponse> GetMenusDataAsync()
         {
+            // Create new object that will become a Struct to return value
             MenuResponse menuResponse = new MenuResponse();
 
             using (HttpClient client = new HttpClient())
@@ -23,7 +24,9 @@ namespace restaurant_desktop_app
                     HttpResponseMessage response = await client.GetAsync("http://localhost:8081/api/Menus");
                     if (response.IsSuccessStatusCode)
                     {
+                        // Read JSON from Response
                         string json = await response.Content.ReadAsStringAsync();
+                        // Deserialize JSON to Object
                         menuResponse = JsonConvert.DeserializeObject<MenuResponse>(json);
                     }
                 }
@@ -40,6 +43,7 @@ namespace restaurant_desktop_app
         // Get one of the menu
         public async Task<MenuWrapper> GetMenuDataAsync(int id)
         {
+            // Create new object that will become a Struct to return value
             MenuWrapper menuWrap = new MenuWrapper();
 
             using (HttpClient client = new HttpClient()){
@@ -48,7 +52,9 @@ namespace restaurant_desktop_app
                     HttpResponseMessage response = await client.GetAsync("http://localhost:8081/api/Menu/"+id);
                     if (response.IsSuccessStatusCode)
                     {
+                        // Read JSON from Response
                         string json = await response.Content.ReadAsStringAsync();
+                        // Deserialize JSON to Object
                         menuWrap = JsonConvert.DeserializeObject<MenuWrapper>(json);
                     }
                 }
@@ -61,6 +67,38 @@ namespace restaurant_desktop_app
             }
 
             return menuWrap;
+        }
+
+        // POST New Menu to database 
+        public async Task<bool> PostMenuDataAsync(Menu menu)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Serialize Object to JSON
+                    string jsonMenu = JsonConvert.SerializeObject(menu);
+                    // Create Content that will be send to API Body
+                    var content = new StringContent(jsonMenu, Encoding.UTF8, "application/json");
+
+                    // Send to API 
+                    HttpResponseMessage response = await client.PostAsync("http://localhost:8081/api/Menu", content);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Failed to Create some data, check the misspelling textfield!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    } else
+                    {
+                        MessageBox.Show("Data Added Successfully!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Error: "+err, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
         }
 
     }
