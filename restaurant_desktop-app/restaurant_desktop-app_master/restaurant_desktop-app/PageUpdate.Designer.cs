@@ -200,9 +200,9 @@ namespace restaurant_desktop_app
             this.label4.Location = new System.Drawing.Point(84, 10);
             this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(311, 31);
+            this.label4.Size = new System.Drawing.Size(302, 31);
             this.label4.TabIndex = 11;
-            this.label4.Text = "localhost:8081/api/Menu/{id}";
+            this.label4.Text = "localhost:8081/api/Menu/:id";
             // 
             // pnlDgv
             // 
