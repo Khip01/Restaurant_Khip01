@@ -32,6 +32,14 @@ Required Software:
 Maybe feature in this Information System is all about **Create, Read, Update, and Delete, no more**. <br>
 But this an simple implementation of API, which can be used as a bridge between databases and different application platforms.
 
+### RESTful API
+Add Executable File! <br><br>
+![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/API_Go.gif)
+
+### Desktop App 
+New Validation Style! <br><br>
+![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/desktop_validator.gif)
+
 ## Instruction:
 - Clone this repo.
 - [DATABASE] In your database, create database named  **db_Restaurant_Khip01** (or you can change the name in setup.go). Then Migrate it with ```go run main.go``` on your terminal.
