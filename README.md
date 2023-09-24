@@ -18,7 +18,7 @@ Required Software:
     - ```go``` command installed on terminal ```(go1.20.7)```
     - Visual Studio Code
     - Go Extexsion *optional
-- [ ] **[ ON GOING ]** Desktop App (C#) 
+- [ ]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Desktop App (C#) 
     - Visual Studio 2019
 - [ ] **[ ON GOING ]** Mobile App (Dart/Flutter) 
     - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
@@ -37,8 +37,10 @@ Add Executable File! <br><br>
 ![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/API_Go.gif)
 
 ### Desktop App 
-New Validation Style! <br><br>
-![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/desktop_validator.gif)
+Take a peek 👀 <br>
+![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/Desktop-App_Sneak-Peek.png) <br>
+New Validation Style! <br>
+![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/desktop_validator.gif) <br>
 
 ## Instruction:
 - Clone this repo.
