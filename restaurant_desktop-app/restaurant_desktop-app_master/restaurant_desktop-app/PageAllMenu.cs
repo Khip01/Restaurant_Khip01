@@ -53,11 +53,16 @@ namespace restaurant_desktop_app
 
             // Take the Menu Object and use it
             MenuWrapper menuWrap = await controller.GetMenuDataAsync(id);
+            // If Object Contain No Data
+            if (menuWrap.Menu.Id == 0)
+            {
+                return;
+            }
 
             // Set the result
-            lblId.Text = "ID: " + menuWrap.Menu.Id.ToString();
+            lblId.Text = "ID                 : " + menuWrap.Menu.Id.ToString();
             lblMenuName.Text = "Menu Name: " + menuWrap.Menu.MenuName;
-            lblDescription.Text = "Description: " + menuWrap.Menu.Description;
+            lblDescription.Text = "Description : " + menuWrap.Menu.Description;
             lblPrice.Text = "Price: Rp." + menuWrap.Menu.Price.ToString();
         }
     }

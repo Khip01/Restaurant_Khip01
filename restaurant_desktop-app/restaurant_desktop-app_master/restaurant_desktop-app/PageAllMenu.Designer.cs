@@ -130,9 +130,9 @@ namespace restaurant_desktop_app
             this.lblDescription.Location = new System.Drawing.Point(20, 143);
             this.lblDescription.Margin = new System.Windows.Forms.Padding(0, 5, 10, 5);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(136, 31);
+            this.lblDescription.Size = new System.Drawing.Size(142, 31);
             this.lblDescription.TabIndex = 16;
-            this.lblDescription.Text = "Description:";
+            this.lblDescription.Text = "Description :";
             // 
             // lblPrice
             // 
@@ -166,9 +166,9 @@ namespace restaurant_desktop_app
             this.lblId.Location = new System.Drawing.Point(20, 61);
             this.lblId.Margin = new System.Windows.Forms.Padding(0, 5, 10, 5);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(41, 31);
+            this.lblId.Size = new System.Drawing.Size(143, 31);
             this.lblId.TabIndex = 13;
-            this.lblId.Text = "ID:";
+            this.lblId.Text = "ID                 :";
             // 
             // label3
             // 

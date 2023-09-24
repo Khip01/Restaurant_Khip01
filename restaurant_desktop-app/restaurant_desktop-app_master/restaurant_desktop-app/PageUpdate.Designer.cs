@@ -29,6 +29,7 @@ namespace restaurant_desktop_app
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -46,6 +47,8 @@ namespace restaurant_desktop_app
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvMenu = new System.Windows.Forms.DataGridView();
+            this.timerErrorField = new System.Windows.Forms.Timer(this.components);
+            this.timerErrorNumber = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.pnlDgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMenu)).BeginInit();
@@ -75,6 +78,7 @@ namespace restaurant_desktop_app
             this.btnUpdate.TabIndex = 16;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // panel1
             // 
@@ -125,8 +129,9 @@ namespace restaurant_desktop_app
             this.txtId.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtId.Location = new System.Drawing.Point(182, 58);
             this.txtId.Name = "txtId";
-            this.txtId.Size = new System.Drawing.Size(84, 38);
+            this.txtId.Size = new System.Drawing.Size(187, 38);
             this.txtId.TabIndex = 17;
+            this.txtId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblDescription
             // 
@@ -249,6 +254,14 @@ namespace restaurant_desktop_app
             this.dgvMenu.TabIndex = 7;
             this.dgvMenu.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMenu_CellContentClick);
             // 
+            // timerErrorField
+            // 
+            this.timerErrorField.Tick += new System.EventHandler(this.timerErrorField_Tick);
+            // 
+            // timerErrorNumber
+            // 
+            this.timerErrorNumber.Tick += new System.EventHandler(this.timerErrorNumber_Tick);
+            // 
             // PageUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -293,5 +306,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvMenu;
+        private System.Windows.Forms.Timer timerErrorField;
+        private System.Windows.Forms.Timer timerErrorNumber;
     }
 }

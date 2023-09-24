@@ -52,11 +52,13 @@ namespace restaurant_desktop_app
         {
             if (string.IsNullOrEmpty(txtMenuName.Text) || string.IsNullOrEmpty(txtPrice.Text))
             {
+                btnCreate.Enabled = false;
                 timerErrorField.Start();
                 return;
             }
             if (!long.TryParse(txtPrice.Text, out long number) && !string.IsNullOrEmpty(txtPrice.Text))
             {
+                btnCreate.Enabled = false;
                 tempPrice = txtPrice.Text;
                 timerErrorNumber.Start();
                 return;
@@ -106,6 +108,7 @@ namespace restaurant_desktop_app
             {
                 // End Of Blink
                 blinkCount = 0;
+                btnCreate.Enabled = true;
                 timerErrorField.Stop();
             }
             else
@@ -147,6 +150,7 @@ namespace restaurant_desktop_app
             {
                 // End Of Blink
                 blinkCount = 0;
+                btnCreate.Enabled = true;
                 timerErrorNumber.Stop();
             }
             else

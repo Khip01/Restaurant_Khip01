@@ -62,7 +62,6 @@ namespace restaurant_desktop_app
                 {
                     // If Error
                     MessageBox.Show("Error: " + er.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }
 
@@ -96,6 +95,67 @@ namespace restaurant_desktop_app
                 catch (Exception err)
                 {
                     MessageBox.Show("Error: "+err, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
+        // PUT / UPDATE Menu from Database
+        public async Task<bool> PutMenuDataAsync(string id, Menu menu)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Create JSON from Param Menu Object 
+                    string jsonMenu = JsonConvert.SerializeObject(menu);
+                    // Create content for send to URL API
+                    var content = new StringContent(jsonMenu, Encoding.UTF8, "application/json");
+
+                    // Try to send Content to Database through API 
+                    HttpResponseMessage response = await client.PutAsync("http://localhost:8081/api/Menu/"+id, content);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Error: Can't Update the Data. \nThere is something wrong with your input", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    } 
+                    else
+                    {
+                        MessageBox.Show("Data Updated Successfully!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Error: "+ err, "UNEXPECTED ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+            }
+        }
+
+        // DELETE Menu from database
+        public async Task<bool> DeleteMenuDataAsync(string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Send to Delete Request to API 
+                    HttpResponseMessage response = await client.DeleteAsync("http://localhost:8081/api/Menu/"+id);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Error: Failed to Delete data.\nThere is something wrong with the requested data.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    } else
+                    {
+                        MessageBox.Show("Data Deleted Successfully!", "SUCCESS", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return true;
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show("Error: "+ err, "UNEXPECTED ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
             }
