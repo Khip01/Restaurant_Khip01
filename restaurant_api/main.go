@@ -18,7 +18,7 @@ func main() {
 	route.GET("/api/Menu/:id", menu_controller.GetMenu)
 	route.POST("/api/Menu", menu_controller.CreateMenu)
 	route.PUT("/api/Menu/:id", menu_controller.UpdateMenu)
-	route.DELETE("/api/Menu", menu_controller.DeleteMenu)
+	route.DELETE("/api/Menu/:id", menu_controller.DeleteMenu)
 
 	// Eksekusi
 	route.Run(":8081")

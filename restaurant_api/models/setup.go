@@ -11,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func ConnectToDatabase() {
-	// Connect to SQL Server Database github.com/denisenkom/go-mssqldb
+	// Connect to SQL Server Database github.com/denisenkol0m/go-mssqldb
 	dsn := "sqlserver://sa:password@KHIP01?database=db_Restaurant_Khip01&connection+timeout=30"
 	database, err := gorm.Open(sqlserver.Open(dsn), &gorm.Config{})
 	if err != nil {

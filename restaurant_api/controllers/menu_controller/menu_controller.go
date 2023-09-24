@@ -1,7 +1,6 @@
 package menu_controller
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/Khip01/Restaurant_Khip01/models"
@@ -100,20 +99,8 @@ func DeleteMenu(context *gin.Context) {
 	// Create Struct for Data
 	var menu models.Menu
 
-	// Create Other Struct for Storing Id
-	var input struct {
-		Id json.Number
-	}
-
-	// Catch Request body from user
-	err := context.ShouldBindJSON(&input)
-	if err != nil {
-		context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Bad Request. Log: " + err.Error()})
-		return
-	}
-
-	// Storing id in variable
-	id, _ := input.Id.Int64()
+	// Catch parameter id
+	id := context.Param("id")
 
 	// Delete Data From Database
 	rowsAffc := models.DB.Delete(&menu, id).RowsAffected
