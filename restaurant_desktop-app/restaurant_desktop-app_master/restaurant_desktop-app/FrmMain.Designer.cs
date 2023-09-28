@@ -159,7 +159,7 @@ namespace restaurant_desktop_app
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 20);
             this.label5.TabIndex = 4;
-            this.label5.Text = "v1.0.0";
+            this.label5.Text = "v1.0.2";
             // 
             // label4
             // 

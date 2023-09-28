@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\Properties\PublishProfiles\ClickOnceProfile2.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Update="FrmMain.cs">
       <SubType>Form</SubType>

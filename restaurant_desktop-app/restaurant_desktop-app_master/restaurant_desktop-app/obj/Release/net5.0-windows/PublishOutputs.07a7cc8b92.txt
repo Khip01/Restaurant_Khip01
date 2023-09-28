@@ -1,0 +1,6 @@
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\restaurant_desktop-app.exe
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\restaurant_desktop-app.dll
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\restaurant_desktop-app.deps.json
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\restaurant_desktop-app.runtimeconfig.json
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\restaurant_desktop-app.pdb
+C:\Users\A AAKHIF ATHALLAH\source\repos\restaurant_desktop-app\Restauran_App-Installer\Newtonsoft.Json.dll

@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Khip01")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("This app is created for demonstrating CRUD Winform App from Database trough API")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.1.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.1")]
