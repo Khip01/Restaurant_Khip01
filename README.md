@@ -18,7 +18,7 @@ Required Software:
     - ```go``` command installed on terminal ```(go1.20.7)```
     - Visual Studio Code
     - Go Extexsion *optional
-- [ ]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Desktop App (C#) 
+- [x]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Desktop App (C#) 
     - Visual Studio 2019
 - [ ] **[ ON GOING ]** Mobile App (Dart/Flutter) 
     - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
