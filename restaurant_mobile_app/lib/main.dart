@@ -19,6 +19,9 @@ class _MainAppState extends State<MainApp> {
   // Declare default index for state
   int _selectedIndex = 0;
 
+  // Buat List dengan semua nilai false, kecuali indeks pertama
+  List<bool> _isSelected = List.generate(4, (i) => i == 0);
+
   // Declare state
   List<Widget> _bodies = [
     AllMenus(),
@@ -26,6 +29,13 @@ class _MainAppState extends State<MainApp> {
     UpdateMenu(),
     DeleteMenu(),
   ];
+
+  void onTaped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _isSelected = List.generate(4, (i) => i == index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,53 +47,86 @@ class _MainAppState extends State<MainApp> {
         ),
         body: _bodies[_selectedIndex],
         drawer: Drawer(
+          backgroundColor: Color.fromARGB(255, 198, 178, 169),
           child: ListView(
             // Remove padding from list view
-            padding: EdgeInsets.zero,
+            padding: EdgeInsets.all(0),
             children: [
               const DrawerHeader(
-                child: Text("Khip01 Restaurant"),
+                margin: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                  color: Colors.brown,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Khip01 Restaurant",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               ListTile(
-                title: const Text("All Menus"),
+                selected: _isSelected[0],
+                selectedTileColor: Color.fromARGB(255, 175, 145, 140),
+                leading: Image(image: AssetImage("assets/Index24.png")),
+                title: const Text(
+                  "All Menus",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onTap: () {
                   // Update the state of the app
-                  setState(() {
-                    _selectedIndex = 0;
-                  });
+                  onTaped(0);
                   // Then Close The Drawer
                   // Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: const Text("Create Menu"),
+                tileColor:
+                    _isSelected[1] ? Color.fromARGB(255, 175, 145, 140) : null,
+                leading: Image(image: AssetImage("assets/Create24.png")),
+                title: const Text(
+                  "Create Menu",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onTap: () {
                   // Update the state of the app
-                  setState(() {
-                    _selectedIndex = 1;
-                  });
+                  onTaped(1);
                   // Then Close The Drawer
                   // Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: const Text("Update Menu"),
+                tileColor:
+                    _isSelected[2] ? Color.fromARGB(255, 175, 145, 140) : null,
+                leading: Image(image: AssetImage("assets/Edit24.png")),
+                title: const Text(
+                  "Update Menu",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onTap: () {
                   // Update the state of the app
-                  setState(() {
-                    _selectedIndex = 2;
-                  });
+                  onTaped(2);
                   // Then Close The Drawer
                   // Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: const Text("Delete Menu"),
+                tileColor:
+                    _isSelected[3] ? Color.fromARGB(255, 175, 145, 140) : null,
+                leading: Image(image: AssetImage("assets/remove24.png")),
+                title: const Text(
+                  "Delete Menu",
+                  style: TextStyle(color: Colors.white),
+                ),
                 onTap: () {
                   // Update the state of the app
-                  setState(() {
-                    _selectedIndex = 3;
-                  });
+                  onTaped(3);
                   // Then Close The Drawer
                   // Navigator.pop(context);
                 },

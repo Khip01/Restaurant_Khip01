@@ -17,3 +17,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+  - assets/Index24.png
+  - assets/Create24.png
+  - assets/Edit24.png
+  - assets/remove24.png
