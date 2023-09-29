@@ -30,7 +30,6 @@ namespace restaurant_desktop_app
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.pnlTitle = new System.Windows.Forms.Panel();
             this.pnlAction = new System.Windows.Forms.Panel();
             this.btnMinimize = new System.Windows.Forms.Button();
@@ -223,7 +222,7 @@ namespace restaurant_desktop_app
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Image = global::restaurant_desktop_app.Properties.Resources.remove24;
             this.btnDelete.Location = new System.Drawing.Point(0, 0);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(250, 69);
@@ -252,7 +251,7 @@ namespace restaurant_desktop_app
             this.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnUpdate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
+            this.btnUpdate.Image = global::restaurant_desktop_app.Properties.Resources.Edit24;
             this.btnUpdate.Location = new System.Drawing.Point(0, 0);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(250, 69);
@@ -281,7 +280,7 @@ namespace restaurant_desktop_app
             this.btnAllMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAllMenu.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAllMenu.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAllMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnAllMenu.Image")));
+            this.btnAllMenu.Image = global::restaurant_desktop_app.Properties.Resources.Index24;
             this.btnAllMenu.Location = new System.Drawing.Point(0, 0);
             this.btnAllMenu.Name = "btnAllMenu";
             this.btnAllMenu.Size = new System.Drawing.Size(250, 69);
@@ -310,7 +309,7 @@ namespace restaurant_desktop_app
             this.btnCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCreate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
+            this.btnCreate.Image = global::restaurant_desktop_app.Properties.Resources.Create24;
             this.btnCreate.Location = new System.Drawing.Point(0, 0);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(250, 69);
@@ -350,7 +349,7 @@ namespace restaurant_desktop_app
             this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAbout.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnAbout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAbout.Image = ((System.Drawing.Image)(resources.GetObject("btnAbout.Image")));
+            this.btnAbout.Image = global::restaurant_desktop_app.Properties.Resources.information32;
             this.btnAbout.Location = new System.Drawing.Point(0, 0);
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(230, 59);
