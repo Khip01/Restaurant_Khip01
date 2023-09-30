@@ -18,7 +18,16 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/Index24.png
-  - assets/Create24.png
-  - assets/Edit24.png
-  - assets/remove24.png
+    - assets/Index24.png
+    - assets/Create24.png
+    - assets/Edit24.png
+    - assets/remove24.png
+
+  fonts:
+    - family: Quicksand
+      fonts: 
+        - asset: fonts/Quicksand-Bold.ttf
+        - asset: fonts/Quicksand-Light.ttf
+        - asset: fonts/Quicksand-Medium.ttf
+        - asset: fonts/Quicksand-SemiBold.ttf
+        - asset: fonts/Quicksand-Regular.ttf

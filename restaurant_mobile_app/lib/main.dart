@@ -22,6 +22,9 @@ class _MainAppState extends State<MainApp> {
   // Buat List dengan semua nilai false, kecuali indeks pertama
   List<bool> _isSelected = List.generate(4, (i) => i == 0);
 
+  // List that use for declare Title
+  String titleApp = "All Menus";
+
   // Declare state
   List<Widget> _bodies = [
     AllMenus(),
@@ -34,15 +37,37 @@ class _MainAppState extends State<MainApp> {
     setState(() {
       _selectedIndex = index;
       _isSelected = List.generate(4, (i) => i == index);
+      switch (index) {
+        case 0:
+          titleApp = "All Menu";
+          break;
+        case 1:
+          titleApp = "Create Menu";
+          break;
+        case 2:
+          titleApp = "Update Menu";
+          break;
+        case 3:
+          titleApp = "Delete Menu";
+          break;
+        default:
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          primarySwatch: Colors.brown,
+          fontFamily: "Quicksand",
+          scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245)),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Khip01 Restaurant"),
+          title: Text(
+            titleApp,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           backgroundColor: Colors.brown[600],
         ),
         body: _bodies[_selectedIndex],
@@ -66,6 +91,7 @@ class _MainAppState extends State<MainApp> {
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
