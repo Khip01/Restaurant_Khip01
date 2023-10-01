@@ -62,7 +62,7 @@ func CreateMenu(context *gin.Context) {
 	models.DB.Create(&menu)
 
 	// Response
-	context.JSON(http.StatusOK, gin.H{"message": "Menu Inserted Successfully"})
+	context.JSON(http.StatusCreated, gin.H{"message": "Menu Inserted Successfully"})
 }
 
 // Update One of the Menu
