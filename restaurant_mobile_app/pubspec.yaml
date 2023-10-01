@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -22,7 +23,6 @@ flutter:
     - assets/Create24.png
     - assets/Edit24.png
     - assets/remove24.png
-
   fonts:
     - family: Quicksand
       fonts: 
