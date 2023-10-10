@@ -4,14 +4,21 @@ import 'package:http/http.dart' as http;
 
 import '../models/menu.dart';
 
+/*
+  For Your Information:
+  192.168.88.246 this is the IP where you allocate your API calls,
+  in this case I use my local WiFi IP so that I can access the API
+  via my mobile phone to demonstrate my Android Application.
+*/
+
 // GET API Req
-Future<Menu> getMenuRequest(String id) async {
-  final uri = Uri.parse("/api/Menu/" + id);
+Future getMenuRequest() async {
+  final uri = Uri.parse("http://192.168.88.246:8081/api/Menus");
   final response = await http.get(uri);
 
   // Check status Request
   if (response.statusCode == 200) {
-    return Menu.fromJson(json.decode(response.body));
+    return json.decode(response.body);
   }
 
   throw Exception("Failed to Load Menu");
@@ -27,7 +34,7 @@ Future<Menu> postMenuRequest(
     "price": price,
   };
 
-  final uri = Uri.parse("localhost:8081/api/Menu");
+  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu");
   final response = await http.post(uri, body: request);
 
   // Check status Request
@@ -48,7 +55,7 @@ Future<Menu> updateMenuRequest(
     "price": price,
   };
 
-  final uri = Uri.parse("localhost:8081/api/Menu/" + id);
+  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu/" + id);
   final response = await http.put(uri, body: request);
 
 // Check status Request
@@ -61,7 +68,7 @@ Future<Menu> updateMenuRequest(
 
 // DELETE API Req
 Future<Menu?>? deleteMenuRequest(String id) async {
-  final uri = Uri.parse("localhost:8081/api/Menu/" + id);
+  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu/" + id);
   final response = await http.delete(uri);
 
   // Check status Request
