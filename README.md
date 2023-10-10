@@ -54,4 +54,4 @@ New Validation Style! <br>
 > There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
 
 # Use
-[![My Skills](https://skillicons.dev/icons?i=go,cs,dotnet,visualstudio,dart,flutter,vscode)](https://github.com/Khip01)
+[![My Skills](https://skillicons.dev/icons?i=go,vscode,cs,dotnet,visualstudio,dart,flutter,androidstudio)](https://github.com/Khip01)
