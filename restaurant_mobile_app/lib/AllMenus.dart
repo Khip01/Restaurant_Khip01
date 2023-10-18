@@ -1,58 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:restaurant_mobile_app/ShowMenu.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
-import 'package:restaurant_mobile_app/main.dart';
-import 'package:http/http.dart' as http;
-import 'package:restaurant_mobile_app/models/menu.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AllMenus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    getMenuRequest();
     return FutureBuilder(
-      future: getMenuRequest(),
+      future: getMenusRequest(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return ListView.builder(
               itemCount: snapshot.data["All Menu"].length,
               itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
-                  height: 180,
-                  child: Card(
-                    elevation: 5,
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            snapshot.data["All Menu"][index]["menu_name"],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 20),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Desc: ",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(snapshot.data["All Menu"][index]
-                                  ["description"]),
-                            ],
-                          ),
-                          Text(
-                            "Rp. " +
-                                snapshot.data["All Menu"][index]["price"]
-                                    .toString(),
-                            style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.lightGreen,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return ShowMenu(
+                            menu: snapshot.data["All Menu"][index],
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
+                    height: 180,
+                    child: Card(
+                      elevation: 5,
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              snapshot.data["All Menu"][index]["menu_name"],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Desc: ",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                Text(snapshot.data["All Menu"][index]
+                                    ["description"]),
+                              ],
+                            ),
+                            Text(
+                              "Rp. " +
+                                  snapshot.data["All Menu"][index]["price"]
+                                      .toString(),
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.lightGreen,
+                                  fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -91,7 +102,8 @@ class AllMenus extends StatelessWidget {
                             child: Text(
                               "404\nNOT FOUND",
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 30),
                             )),
                         SvgPicture.asset(
                           'assets/NotFound.svg',

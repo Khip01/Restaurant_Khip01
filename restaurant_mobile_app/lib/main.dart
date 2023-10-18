@@ -59,9 +59,10 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          primarySwatch: Colors.brown,
-          fontFamily: "Quicksand",
-          scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245)),
+        primarySwatch: Colors.brown,
+        fontFamily: "Quicksand",
+        scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text(

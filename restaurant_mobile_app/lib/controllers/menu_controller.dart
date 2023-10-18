@@ -12,7 +12,7 @@ import '../models/menu.dart';
 */
 
 // GET API Req
-Future getMenuRequest() async {
+Future getMenusRequest() async {
   final uri = Uri.parse("http://192.168.88.246:8081/api/Menus");
   final response = await http.get(uri);
 
