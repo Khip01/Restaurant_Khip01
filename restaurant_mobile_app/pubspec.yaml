@@ -26,6 +26,7 @@ flutter:
     - assets/Edit24.png
     - assets/remove24.png
     - assets/NotFound.svg
+    - assets/CMenuImg1.jpg
   fonts:
     - family: Quicksand
       fonts: 
