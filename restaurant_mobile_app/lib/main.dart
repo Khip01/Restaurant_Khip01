@@ -64,6 +64,7 @@ class _MainAppState extends State<MainApp> {
         scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245),
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             titleApp,
