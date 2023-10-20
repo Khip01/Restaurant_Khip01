@@ -23,7 +23,7 @@ Required Software:
 - [ ] **[ ON GOING ]** Mobile App (Dart/Flutter) 
     - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
     - Flutter Extension *optional
-- [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Database (SqlServer) 
+- [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Database (SQLServer) 
     - SQL Server Management Studio 18
     - Other? (maybe in future i'll add mariaDb(mysql), if I'm free, lol)
 - Postman
