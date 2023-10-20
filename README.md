@@ -45,7 +45,7 @@ New Validation Style! <br>
 ## Instruction:
 - Clone this repo.
 - [DATABASE] In your database, create database named  **db_Restaurant_Khip01** (or you can change the name in setup.go). Then Migrate it with ```go run main.go``` on your terminal.
-- [DESKTOP APP] You can open .sln file/run it.
+- [DESKTOP APP] You can open .sln file/run the installer app.
 - [MOBILE APP] Just run the application via vscode/terminal.
 
 ---
