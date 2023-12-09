@@ -23,7 +23,10 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
         padding: EdgeInsets.zero,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             child: Stack(
               children: [
                 Container(
@@ -66,187 +69,213 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                       child: Container(
                         alignment: Alignment.topLeft,
                         width: double.maxFinite,
-                        height: MediaQuery.of(context).size.height - 100,
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height - 100,
                         padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
-                              alignment: Alignment.centerLeft,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: SizedBox(
-                                  width: 80,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Icon(Icons.arrow_back,
-                                          color: Colors.white),
-                                      Text("Back",
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 245, 245, 245),
-                                              fontSize: 14))
-                                    ],
-                                  ),
-                                ),
-                                style: ElevatedButton.styleFrom(
-                                  // shape: CircleBorder(),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100))),
-                                  padding: EdgeInsets.all(10),
-                                  backgroundColor: Colors.brown,
-                                  // <-- Button color
-                                  foregroundColor:
-                                      Colors.red, // <-- Splash color
-                                ),
-                              ),
-                            ),
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              alignment: Alignment.centerLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                            Flexible(
+                              flex: 1,
+                              child: Container(
+                                margin: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                                alignment: Alignment.centerLeft,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: SizedBox(
+                                    width: 80,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Text(
-                                          "Menu Item Details",
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        Text(
-                                          "Let's create a delicious new food menu!",
-                                          style: TextStyle(fontSize: 14),
-                                        )
+                                        Icon(Icons.arrow_back,
+                                            color: Colors.white),
+                                        Text("Back",
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 245, 245, 245),
+                                                fontSize: 14))
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 20),
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        labelText: "Name",
-                                        // errorText: "Error",
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      controller: nameField,
-                                    ),
+                                  style: ElevatedButton.styleFrom(
+                                    // shape: CircleBorder(),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(100))),
+                                    padding: EdgeInsets.all(10),
+                                    backgroundColor: Colors.brown,
+                                    // <-- Button color
+                                    foregroundColor:
+                                    Colors.red, // <-- Splash color
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 20),
-                                    child: TextField(
-                                      maxLines: 4,
-                                      decoration: InputDecoration(
-                                        labelText: "Description",
-                                        // errorText: "Error",
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      controller: descField,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 20),
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                        labelText: "Price",
-                                        // errorText: "Error",
-                                        border: OutlineInputBorder(),
-                                      ),
-                                      controller: priceField,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
-                            Container(
-                              height: 135,
-                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: MediaQuery.of(context).size.width,
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.green,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(25),
+                            Flexible(
+                              flex: 4,
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  alignment: Alignment.centerLeft,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 20),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Menu Item Details",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            Text(
+                                              "Let's create a delicious new food menu!",
+                                              style: TextStyle(fontSize: 14),
+                                            )
+                                          ],
                                         ),
-                                        elevation: 4.0,
                                       ),
-                                      onPressed: () {
-                                        // Todo Create Menu
-                                        // Mengubah Index yang aktif
-                                        setState(() {
-                                          util.setIsActiveIndex(0);
-                                        });
-                                        // Berpindah ke halaman AllMenus()
-                                        Navigator.popUntil(
-                                          context,
-                                          // MaterialPageRoute(
-                                          //     builder: (value) => MainApp()),
-                                          // (route) => route.isFirst,
-                                          ModalRoute.withName("/"),
-
-                                        );
-                                        // Show SnackBar
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: const Text(
-                                                "Data added Successfully! (Later :p)"),
-                                            behavior: SnackBarBehavior.floating,
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: "Name",
+                                            // errorText: "Error",
+                                            border: OutlineInputBorder(),
                                           ),
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Create the Menu!",
-                                          style: TextStyle(color: Colors.white),
+                                          controller: nameField,
                                         ),
                                       ),
-                                    ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 20),
+                                        child: TextField(
+                                          maxLines: 4,
+                                          decoration: InputDecoration(
+                                            labelText: "Description",
+                                            // errorText: "Error",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          controller: descField,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 20),
+                                        child: TextFormField(
+                                          decoration: InputDecoration(
+                                            labelText: "Price",
+                                            // errorText: "Error",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          controller: priceField,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 150,
-                                    height: 50,
-                                    child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.redAccent,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              flex: 3,
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  height: 135,
+                                  margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                    children: [
+                                      SizedBox(
+                                        width: MediaQuery
+                                            .of(context)
+                                            .size
+                                            .width,
+                                        height: 50,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.green,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
                                               BorderRadius.circular(25),
+                                            ),
+                                            elevation: 4.0,
+                                          ),
+                                          onPressed: () {
+                                            // Mengubah Index yang aktif
+                                            setState(() {
+                                              util.setIsActiveIndex(0);
+                                            });
+                                            // Berpindah ke halaman AllMenus()
+                                            Navigator.popUntil(
+                                              context,
+                                              // MaterialPageRoute(
+                                              //     builder: (value) => MainApp()),
+                                              // (route) => route.isFirst,
+                                              ModalRoute.withName("/"),
+
+                                            );
+                                            // Show SnackBar
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: const Text(
+                                                    "Data added Successfully! (Later :p)"),
+                                                behavior: SnackBarBehavior
+                                                    .floating,
+                                              ),
+                                            );
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Text(
+                                              "Create the Menu!",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
                                         ),
-                                        elevation: 4.0,
                                       ),
-                                      onPressed: () {
-                                        nameField.clear();
-                                        descField.clear();
-                                        priceField.clear();
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(15.0),
-                                        child: Text(
-                                          "Reset All Field",
-                                          style: TextStyle(color: Colors.white),
+                                      SizedBox(
+                                        width: 150,
+                                        height: 50,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.redAccent,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(25),
+                                            ),
+                                            elevation: 4.0,
+                                          ),
+                                          onPressed: () {
+                                            nameField.clear();
+                                            descField.clear();
+                                            priceField.clear();
+                                          },
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Text(
+                                              "Reset All Field",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
                             ),
                           ],

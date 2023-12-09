@@ -191,7 +191,7 @@ class _DeleteMenuState extends State<DeleteMenu> {
                                       fontSize: 20),
                                 ),
                                 Container(
-                                  height: 55,
+                                  height:65,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
