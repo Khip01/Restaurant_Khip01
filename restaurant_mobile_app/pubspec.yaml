@@ -12,6 +12,8 @@ dependencies:
   http: ^1.1.0
   shimmer: ^3.0.0
   flutter_svg: ^2.0.7
+  shared_preferences: ^2.2.2
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -27,6 +29,12 @@ flutter:
     - assets/remove24.png
     - assets/NotFound.svg
     - assets/CMenuImg1.jpg
+    - assets/Food1.jpg
+    - assets/Food2.jpg
+    - assets/Food3.jpg
+    - assets/Food4.jpg
+    - assets/DragLeft.jpg
+    - assets/UndoLeft.jpg
   fonts:
     - family: Quicksand
       fonts: 
