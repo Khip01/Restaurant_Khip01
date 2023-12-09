@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
-class ShowCreateMenu extends StatelessWidget {
+import 'Utils/util.dart';
+
+class ShowCreateMenu extends StatefulWidget {
+  ShowCreateMenu({Key? key}) : super(key: key);
+
+  @override
+  State<ShowCreateMenu> createState() => _ShowCreateMenuState();
+}
+
+class _ShowCreateMenuState extends State<ShowCreateMenu> {
+  Util util = new Util();
+
   final nameField = TextEditingController();
   final descField = TextEditingController();
   final priceField = TextEditingController();
-
-  ShowCreateMenu({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -98,17 +107,26 @@ class ShowCreateMenu extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
-                              height: 330,
+                              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                               alignment: Alignment.centerLeft,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
                                     padding: EdgeInsets.only(bottom: 20),
-                                    child: Text(
-                                      "Menu Item Details",
-                                      style: TextStyle(fontSize: 18),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Menu Item Details",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                        Text(
+                                          "Let's create a delicious new food menu!",
+                                          style: TextStyle(fontSize: 14),
+                                        )
+                                      ],
                                     ),
                                   ),
                                   Padding(
@@ -119,7 +137,6 @@ class ShowCreateMenu extends StatelessWidget {
                                         // errorText: "Error",
                                         border: OutlineInputBorder(),
                                       ),
-
                                       controller: nameField,
                                     ),
                                   ),
@@ -132,7 +149,6 @@ class ShowCreateMenu extends StatelessWidget {
                                         // errorText: "Error",
                                         border: OutlineInputBorder(),
                                       ),
-
                                       controller: descField,
                                     ),
                                   ),
@@ -144,7 +160,6 @@ class ShowCreateMenu extends StatelessWidget {
                                         // errorText: "Error",
                                         border: OutlineInputBorder(),
                                       ),
-
                                       controller: priceField,
                                     ),
                                   ),
@@ -156,7 +171,8 @@ class ShowCreateMenu extends StatelessWidget {
                               margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width,
@@ -165,16 +181,42 @@ class ShowCreateMenu extends StatelessWidget {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.green,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                         ),
                                         elevation: 4.0,
                                       ),
                                       onPressed: () {
                                         // Todo Create Menu
+                                        // Mengubah Index yang aktif
+                                        setState(() {
+                                          util.setIsActiveIndex(0);
+                                        });
+                                        // Berpindah ke halaman AllMenus()
+                                        Navigator.popUntil(
+                                          context,
+                                          // MaterialPageRoute(
+                                          //     builder: (value) => MainApp()),
+                                          // (route) => route.isFirst,
+                                          ModalRoute.withName("/"),
+
+                                        );
+                                        // Show SnackBar
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: const Text(
+                                                "Data added Successfully! (Later :p)"),
+                                            behavior: SnackBarBehavior.floating,
+                                          ),
+                                        );
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(15.0),
-                                        child: Text("Create the Menu!"),
+                                        child: Text(
+                                          "Create the Menu!",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -185,7 +227,8 @@ class ShowCreateMenu extends StatelessWidget {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.redAccent,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
                                         ),
                                         elevation: 4.0,
                                       ),
@@ -196,7 +239,10 @@ class ShowCreateMenu extends StatelessWidget {
                                       },
                                       child: Padding(
                                         padding: const EdgeInsets.all(15.0),
-                                        child: Text("Reset All Field"),
+                                        child: Text(
+                                          "Reset All Field",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
                                       ),
                                     ),
                                   ),
