@@ -42,11 +42,16 @@ Take a peek 👀 <br>
 New Validation Style! <br>
 ![](https://github.com/Khip01/Restaurant_Khip01/blob/main/src/desktop_validator.gif) <br>
 
+### Mobile App
+Take a peek 👀 <br>
+![]() <br>
+<img src="https://github.com/Khip01/Restaurant_Khip01/blob/main/src/Mobile-App_Sneak-Peek.jpg" alt="Mobile-App_Sneak-Peek" height="700"/>
+
 ## Instruction:
 - Clone this repo.
 - [DATABASE] In your database, create database named  **db_Restaurant_Khip01** (or you can change the name in setup.go). Then Migrate it with ```go run main.go``` on your terminal.
 - [DESKTOP APP] You can open .sln file/run the installer app.
-- [MOBILE APP] Just run the application via vscode/terminal.
+- [MOBILE APP] Just run the application via vscode/android studio/terminal.
 
 ---
 
