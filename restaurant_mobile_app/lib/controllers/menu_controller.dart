@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:restaurant_mobile_app/Utils/util.dart';
 
 import '../models/menu.dart';
 
@@ -11,9 +12,29 @@ import '../models/menu.dart';
   via my mobile phone to demonstrate my Android Application.
 */
 
+String ip = "";
+// If You have IP address for IP,
+// then set the default at the SharedPregerence in main.dart file
+// in initState
+
+// String getIP(){
+//   Util util = new Util();
+//   String ip;
+//   util.getApiAddress().then((ipValue) =>  ip = ipValue);
+//   return ip;
+// }
+
+_loadRequirements() async {
+  Util util = new Util();
+  util.getApiAddress().then((apiIp){
+    ip = apiIp;
+  });
+}
+
 // GET API Req
 Future getMenusRequest() async {
-  final uri = Uri.parse("http://192.168.88.246:8081/api/Menus");
+  _loadRequirements();
+  final uri = Uri.parse("http://$ip:8081/api/Menus");
   final response = await http.get(uri);
 
   // Check status Request
@@ -25,8 +46,8 @@ Future getMenusRequest() async {
 }
 
 // POST API Req
-Future<Menu> postMenuRequest(
-    String menuName, String description, int price) async {
+Future<Menu> postMenuRequest(String menuName, String description, int price) async {
+  _loadRequirements();
   // Declare Map for store the data value
   Map<String, dynamic> request = {
     "menu_name": menuName,
@@ -34,7 +55,7 @@ Future<Menu> postMenuRequest(
     "price": price,
   };
 
-  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu");
+  final uri = Uri.parse("http://$ip:8081/api/Menu");
   final response = await http.post(uri, body: request);
 
   // Check status Request
@@ -48,6 +69,7 @@ Future<Menu> postMenuRequest(
 // UPDATE API Req
 Future<Menu> updateMenuRequest(
     String id, String menuName, String description, int price) async {
+  _loadRequirements();
   // Declare Map for store the data value
   Map<String, dynamic> request = {
     "menu_name": menuName,
@@ -55,7 +77,7 @@ Future<Menu> updateMenuRequest(
     "price": price,
   };
 
-  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu/" + id);
+  final uri = Uri.parse("http://$ip:8081/api/Menu/" + id);
   final response = await http.put(uri, body: request);
 
 // Check status Request
@@ -68,7 +90,8 @@ Future<Menu> updateMenuRequest(
 
 // DELETE API Req
 Future<Menu?>? deleteMenuRequest(String id) async {
-  final uri = Uri.parse("http://192.168.88.246:8081/api/Menu/" + id);
+  _loadRequirements();
+  final uri = Uri.parse("http://$ip:8081/api/Menu/" + id);
   final response = await http.delete(uri);
 
   // Check status Request
