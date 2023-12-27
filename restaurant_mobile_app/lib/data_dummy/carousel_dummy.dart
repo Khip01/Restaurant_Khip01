@@ -1,6 +1,6 @@
 class CarouselDummy {
     List<String> image = ["assets/Food1.jpg", "assets/Food2.jpg", "assets/Food3.jpg", "assets/Food4.jpg"];
-    List<String> subTitle = ["Hi, what do you want to eat today?", "Come on, let's have a look first", "What are you waiting for? Come on, choose your menu!", "Take a look! The menu here is delicious, you know"];
+    List<String> subTitle = ["Look at the menu at your restaurant!", "Monitor and organize the menu you have", "Prevent data errors on your restaurant menu", "You come in as a manager in this restaurant, manage your restaurant"];
 
     List<String> imageDelete = [
         "assets/DragLeft.jpg",
