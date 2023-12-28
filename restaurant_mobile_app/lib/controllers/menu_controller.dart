@@ -56,7 +56,7 @@ Future<Menu> postMenuRequest(String menuName, String description, int price) asy
   };
 
   final uri = Uri.parse("http://$ip:8081/api/Menu");
-  final response = await http.post(uri, body: request);
+  final response = await http.post(uri, body: json.encode(request));
 
   // Check status Request
   if (response.statusCode == 201) {
