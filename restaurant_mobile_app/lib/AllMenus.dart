@@ -18,6 +18,15 @@ class AllMenus extends StatefulWidget {
 bool isApiMode = true;
 Util util = new Util();
 
+// Dropdown Filter ----
+const List<String> filterList = <String>[
+  "latest",
+  "a - z",
+  "z - a",
+  "cheapest",
+  "highest price"
+];
+
 class _AllMenusState extends State<AllMenus> {
   // Init untuk mengubah IsApiMode
   void initMode() {
@@ -28,6 +37,8 @@ class _AllMenusState extends State<AllMenus> {
       });
     });
   }
+
+  String filterValue = filterList.first;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +51,13 @@ class _AllMenusState extends State<AllMenus> {
       return FutureBuilder(
         future: getMenusRequest(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
             return AllMenuPage(isApiMode, snapshot);
-          } else {
-            if (snapshot.hasError) {
-              return AllMenuPageError();
-            }
+          } else if (snapshot.hasError &&
+              snapshot.connectionState == ConnectionState.done) {
+            return AllMenuPageError();
+          } else
             return ShimmerAllMenu(context);
-          }
         },
       );
     } else {
@@ -116,8 +126,7 @@ class _AllMenusState extends State<AllMenus> {
     );
   }
 
-  Widget AllMenuPage(bool isAPIMode,
-      [AsyncSnapshot<dynamic>? snapshot]) {
+  Widget AllMenuPage(bool isAPIMode, [AsyncSnapshot<dynamic>? snapshot]) {
     MenuDummy menuDummy = new MenuDummy(); // Dummy for menu
 
     return Container(
@@ -132,9 +141,38 @@ class _AllMenusState extends State<AllMenus> {
                   color: Colors.brown,
                 ),
               ),
-              Spacer(),
               Flexible(
-                flex: 6,
+                flex: 2,
+                child: Container(
+                  height: double.maxFinite,
+                  margin: EdgeInsets.fromLTRB(20, 50, 20, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        height: 60,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "All Menu's",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24),
+                            ),
+                            SizedBox(height: 25,child: Center(child: Text("Let's look at some menus!"))),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                          height: 60,
+                          child: FilterSection()),
+                    ],
+                  ),
+                ),
+              ),
+              Flexible(
+                flex: 5,
                 child: ListView.builder(
                   itemCount: isAPIMode == true
                       ? snapshot?.data["All Menu"].length
@@ -149,7 +187,8 @@ class _AllMenusState extends State<AllMenus> {
                               return ShowMenu(
                                 menu: isAPIMode == true
                                     ? snapshot?.data["All Menu"][index]
-                                    : menuDummy.menu[index], isApiMode: isAPIMode,
+                                    : menuDummy.menu[index],
+                                isApiMode: isAPIMode,
                               );
                             },
                           ),
@@ -238,7 +277,7 @@ class _AllMenusState extends State<AllMenus> {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 24,
+                                  fontSize: 20,
                                 ),
                               ),
                               carouselTextShow(context),
@@ -312,7 +351,7 @@ class _AllMenusState extends State<AllMenus> {
     );
   }
 
-  Widget AllMenuPageError(){
+  Widget AllMenuPageError() {
     return Container(
       child: Stack(children: [
         Positioned.fill(
@@ -326,8 +365,8 @@ class _AllMenusState extends State<AllMenus> {
                     child: Text(
                       "404\nNOT FOUND",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w900, fontSize: 30),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
                     )),
                 SvgPicture.asset(
                   'assets/NotFound.svg',
@@ -349,4 +388,44 @@ class _AllMenusState extends State<AllMenus> {
     );
   }
 
+  Widget FilterSection() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        SizedBox(height: 25,child: Center(child: Text("Sort by")),),
+        SizedBox(
+          height: 25,
+          child: DropdownButton(
+            underline: SizedBox(),
+            icon: Icon(Icons.sort),
+            padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+            value: filterValue,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+            items: filterList.map<DropdownMenuItem<String>>(
+              (String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(3, 2, 5, 2),
+                    child: Text(
+                      value,
+                      textAlign: TextAlign.right,
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
+            onChanged: (String? value) {
+              setState(() {
+                filterValue = value!;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
 }
