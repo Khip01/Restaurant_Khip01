@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 
 import 'Utils/util.dart';
 
@@ -15,6 +17,37 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
   final nameField = TextEditingController();
   final descField = TextEditingController();
   final priceField = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  void _submit(){
+    // Mengubah Index yang aktif
+    setState(() {
+      postMenuRequest(
+          nameField.text,
+          descField.text,
+          int.parse(priceField.text));
+      util.setIsActiveIndex(0);
+    });
+    // Berpindah ke halaman AllMenus()
+    Navigator.popUntil(
+      context,
+      // MaterialPageRoute(
+      //     builder: (value) => MainApp()),
+      // (route) => route.isFirst,
+      ModalRoute.withName("/"),
+    );
+    // Show SnackBar
+    ScaffoldMessenger.of(context)
+        .showSnackBar(
+      SnackBar(
+        content: const Text(
+            "Data added Successfully! (Later :p)"),
+        behavior:
+        SnackBarBehavior.floating,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,65 +154,100 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                 child: Container(
                                   margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                                   alignment: Alignment.centerLeft,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(bottom: 20),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              "Menu Item Details",
-                                              style: TextStyle(fontSize: 18),
+                                  child: Form(
+                                    key: _formKey,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(bottom: 20),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Menu Item Details",
+                                                style: TextStyle(fontSize: 18),
+                                              ),
+                                              Text(
+                                                "Let's create a delicious new food menu!",
+                                                style: TextStyle(fontSize: 14),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 20),
+                                          child: TextFormField(
+                                            validator: (value){
+                                              if(value == null || value.isEmpty)
+                                                return "This field is required";
+                                              else
+                                                return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              labelText: "Name",
+                                              // errorText: "Error",
+                                              border: OutlineInputBorder(),
                                             ),
-                                            Text(
-                                              "Let's create a delicious new food menu!",
-                                              style: TextStyle(fontSize: 14),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 20),
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            labelText: "Name",
-                                            // errorText: "Error",
-                                            border: OutlineInputBorder(),
+                                            controller: nameField,
+                                            onChanged: (value){
+                                              if (value.isNotEmpty)
+                                                _formKey.currentState!.validate();
+                                            },
                                           ),
-                                          controller: nameField,
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 20),
-                                        child: TextField(
-                                          maxLines: 4,
-                                          decoration: InputDecoration(
-                                            labelText: "Description",
-                                            // errorText: "Error",
-                                            border: OutlineInputBorder(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 20),
+                                          child: TextFormField(
+                                            maxLines: 4,
+                                            validator: (value){
+                                              if(value == null || value.isEmpty)
+                                                return "This field is required";
+                                              else
+                                                return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              labelText: "Description",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            controller: descField,
+                                            onChanged: (value){
+                                              if (value.isNotEmpty)
+                                                _formKey.currentState!.validate();
+                                            },
                                           ),
-                                          controller: descField,
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            bottom: 20),
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            labelText: "Price",
-                                            // errorText: "Error",
-                                            border: OutlineInputBorder(),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              bottom: 20),
+                                          child: TextFormField(
+                                            validator: (value){
+                                              if(value == null || value.isEmpty)
+                                                return "This field is required";
+                                              else
+                                                return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              labelText: "Price",
+                                              // errorText: "Error",
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            controller: priceField,
+                                            onChanged: (value){
+                                              if (value.isNotEmpty)
+                                                _formKey.currentState!.validate();
+                                            },
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.digitsOnly
+                                            ],
                                           ),
-                                          controller: priceField,
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -212,29 +280,9 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                             elevation: 4.0,
                                           ),
                                           onPressed: () {
-                                            // Mengubah Index yang aktif
-                                            setState(() {
-                                              util.setIsActiveIndex(0);
-                                            });
-                                            // Berpindah ke halaman AllMenus()
-                                            Navigator.popUntil(
-                                              context,
-                                              // MaterialPageRoute(
-                                              //     builder: (value) => MainApp()),
-                                              // (route) => route.isFirst,
-                                              ModalRoute.withName("/"),
-
-                                            );
-                                            // Show SnackBar
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: const Text(
-                                                    "Data added Successfully! (Later :p)"),
-                                                behavior: SnackBarBehavior
-                                                    .floating,
-                                              ),
-                                            );
+                                            if (_formKey.currentState!.validate()) {
+                                              _submit();
+                                            }
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.all(15.0),
