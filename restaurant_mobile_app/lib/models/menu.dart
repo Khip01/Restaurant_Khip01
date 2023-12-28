@@ -2,7 +2,7 @@ class Menu {
   final int Id;
   final String MenuName;
   final String Description;
-  final double Price;
+  final int Price;
 
   Menu({
     required this.Id,
@@ -16,7 +16,7 @@ class Menu {
       Id: json['id'],
       MenuName: json['menu_name'],
       Description: json['description'],
-      Price: json['price'].toDouble(),
+      Price: json['price'],
     );
   }
 }
