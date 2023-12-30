@@ -24,7 +24,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    util.setApiAddress("192.168.0.11");
+    util.setApiAddress("192.168.1.12");
     util.setIsActiveIndex(0);
     initMode();
   }
