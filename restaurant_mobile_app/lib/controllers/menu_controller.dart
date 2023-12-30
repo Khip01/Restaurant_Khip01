@@ -33,7 +33,7 @@ _loadRequirements() async {
 
 // GET API Req
 Future getMenusRequest() async {
-  _loadRequirements();
+  await _loadRequirements();
   final uri = Uri.parse("http://$ip:8081/api/Menus");
   final response = await http.get(uri);
 
@@ -69,7 +69,7 @@ Future<Menu> postMenuRequest(String menuName, String description, int price) asy
 // UPDATE API Req
 Future<Menu> updateMenuRequest(
     String id, String menuName, String description, int price) async {
-  _loadRequirements();
+  await _loadRequirements();
   // Declare Map for store the data value
   Map<String, dynamic> request = {
     "menu_name": menuName,
@@ -90,7 +90,7 @@ Future<Menu> updateMenuRequest(
 
 // DELETE API Req
 Future<Menu?>? deleteMenuRequest(String id) async {
-  _loadRequirements();
+  await _loadRequirements();
   final uri = Uri.parse("http://$ip:8081/api/Menu/" + id);
   final response = await http.delete(uri);
 
