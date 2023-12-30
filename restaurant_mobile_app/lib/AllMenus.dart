@@ -51,11 +51,10 @@ class _AllMenusState extends State<AllMenus> {
       return FutureBuilder(
         future: getMenusRequest(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return AllMenuPage(isApiMode, snapshot);
-          } else if (snapshot.hasError &&
-              snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
             return AllMenuPageError();
+          } else if (snapshot.hasData) {
+            return AllMenuPage(isApiMode, snapshot);
           } else
             return ShimmerAllMenu(context);
         },
