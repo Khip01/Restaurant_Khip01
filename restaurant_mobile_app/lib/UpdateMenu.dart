@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:restaurant_mobile_app/ShowUpdateMenu.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
@@ -28,30 +30,87 @@ class _UpdateMenuState extends State<UpdateMenu> {
     super.initState();
   }
 
+  // Stream Controller
+  // final Stream<Map> _menus = (() {
+  //   while (true) {
+  //     late final StreamController<Map> controller;
+  //     controller = StreamController<Map>(
+  //       onListen: () async {
+  //         Map menu = await getMenusRequest();
+  //         controller.add(menu);
+  //         controller.close();
+  //       }
+  //     );
+  //     return controller.stream;
+  //   }
+  // })();
+
+  Stream<Map> getMenuStream() async* {
+    while (true) {
+      // METHOD 1
+      // late final StreamController<Map> controller;
+      // controller = StreamController<Map>(
+      //     onListen: () async {
+      //       Map menu = await getMenusRequest();
+      //       controller.add(menu);
+      //       controller.close();
+      //     }
+      // );
+      // yield* controller.stream;
+
+      // METHOD 2
+      await Future.delayed(Duration(seconds: 1));
+
+      try {
+        Map menu = await getMenusRequest();
+        yield menu;
+      } catch (e) {
+        // Handle error jika terjadi
+        throw("Error fetching menus: $e");
+      }
+    }
+  }
+
   Widget build(BuildContext context) {
-    if (isApiMode){
-      return FutureBuilder(
-        future: getMenusRequest(),
-        builder: (context, snapshot){
-          if(snapshot.hasError)
+    if (isApiMode) {
+      return StreamBuilder(
+        stream: getMenuStream(),
+        // builder: (context, snapshot) {
+        //   if (snapshot.hasError)
+        //     return ErrorUpdatePage();
+        //   else if (snapshot.hasData)
+        //     return UpdatePage(snapshot);
+        //   else
+        //     return ShimmerUpdatePage();
+        // },
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
             return ErrorUpdatePage();
-          else if (snapshot.hasData)
-            return UpdatePage(snapshot);
-          else
-            return ShimmerUpdatePage();
+          } else {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return UpdatePage();
+              case ConnectionState.waiting:
+                return ShimmerUpdatePage();
+              case ConnectionState.active:
+                return UpdatePage(snapshot);
+              case ConnectionState.done:
+                return UpdatePage(snapshot);
+            }
+          }
         },
       );
     } else
       return UpdatePage();
   }
 
-  Widget ErrorUpdatePage(){
+  Widget ErrorUpdatePage() {
     return SizedBox(
       child: Text("Ini Error"),
     );
   }
 
-  Widget ShimmerUpdatePage(){
+  Widget ShimmerUpdatePage() {
     return SizedBox(
       child: Text("Ini Shimmer"),
     );
@@ -77,13 +136,15 @@ class _UpdateMenuState extends State<UpdateMenu> {
     return Flexible(
       flex: 8,
       child: ListView.builder(
-        itemCount: isApiMode ? snapshot?.data["All Menu"].length : menuDummy.menu.length,
+        itemCount: isApiMode
+            ? snapshot?.data["All Menu"].length
+            : menuDummy.menu.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: [
               Container(
                 margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                height: 180,
+                height: 185,
                 child: Card(
                   clipBehavior: Clip.antiAlias,
                   elevation: 5,
@@ -99,7 +160,10 @@ class _UpdateMenuState extends State<UpdateMenu> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                menuDummy.menu[index]["menu_name"],
+                                isApiMode
+                                    ? snapshot?.data["All Menu"][index]
+                                        ["menu_name"]
+                                    : menuDummy.menu[index]["menu_name"],
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -114,7 +178,11 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      menuDummy.menu[index]["description"],
+                                      isApiMode
+                                          ? snapshot?.data["All Menu"][index]
+                                              ["description"]
+                                          : menuDummy.menu[index]
+                                              ["description"],
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                     ),
@@ -122,8 +190,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                 ),
                               ),
                               Text(
-                                "Rp. " +
-                                    menuDummy.menu[index]["price"].toString(),
+                                "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.lightGreen,
@@ -147,8 +214,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
                               Icons.edit_square,
                               color: Colors.brown,
                             ),
-                            onPressed: () =>
-                                _showModalBottomSheet(context, index),
+                            onPressed: () => _showModalBottomSheet(context,
+                                index, snapshot?.data["All Menu"][index]),
                           ),
                         ),
                       )
@@ -220,7 +287,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
     );
   }
 
-  void _showModalBottomSheet(BuildContext context, int index) {
+  void _showModalBottomSheet(BuildContext context, int index, Map? menu) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -256,9 +323,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: Text(
-                            "Are You sure to Edit Menu " +
-                                menuDummy.menu[index]["menu_name"] +
-                                "?",
+                            "Are You sure to Edit Menu ${(isApiMode) ? (menu?["menu_name"]) : (menuDummy.menu[index]["menu_name"])}?",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 24),
                             textAlign: TextAlign.center,
@@ -278,17 +343,24 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                   elevation: 4.0,
                                 ),
                                 onPressed: () {
+                                  Navigator.pop(context);
                                   Navigator.push(
                                     context,
+
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                      return ShowUpdateMenu(indexMenu: index);
-                                    }),
-                                  );
+                                          return ShowUpdateMenu(
+                                            indexMenu: index,
+                                            menu: menu,
+                                          );
+                                        }),
+                                  ).then((val){
+                                    setState((){});
+                                  });
                                 },
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                                  const EdgeInsets.fromLTRB(30, 15, 30, 15),
                                   child: Text(
                                     "Update",
                                     style: TextStyle(color: Colors.white),
@@ -308,7 +380,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                 },
                                 child: Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                                  const EdgeInsets.fromLTRB(30, 15, 30, 15),
                                   child: Text(
                                     "Cancle",
                                     style: TextStyle(color: Colors.white),
