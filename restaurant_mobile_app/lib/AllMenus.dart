@@ -42,8 +42,11 @@ class _AllMenusState extends State<AllMenus> {
 
   @override
   Widget build(BuildContext context) {
+    Util util = Util();
+
     // initMode(); // Mengecek secara terus menerus kondisi dari isApiMode (Tetapi akan setState Terus ke Widget  dan mengakibatkan spam di permintaan request ke API getMenusRequest())
     debugPrint("Hai");
+    util.getApiAddress().then((value) => debugPrint("Get Request at ${value}"));
     isApiMode = true; // development mode to test both isApiMode Swicth
 
     // debugPrint(isApiMode.toString());
