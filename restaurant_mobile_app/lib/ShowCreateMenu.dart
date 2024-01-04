@@ -181,6 +181,7 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                           padding: const EdgeInsets.only(
                                               bottom: 20),
                                           child: TextFormField(
+                                            autovalidateMode: AutovalidateMode.onUserInteraction,
                                             validator: (value){
                                               if(value == null || value.isEmpty)
                                                 return "This field is required";
@@ -193,16 +194,17 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                               border: OutlineInputBorder(),
                                             ),
                                             controller: nameField,
-                                            onChanged: (value){
-                                              if (value.isNotEmpty)
-                                                _formKey.currentState!.validate();
-                                            },
+                                            // onChanged: (value){
+                                            //   if (value.isNotEmpty)
+                                            //     _formKey.currentState!.validate();
+                                            // },
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 20),
                                           child: TextFormField(
+                                            autovalidateMode: AutovalidateMode.onUserInteraction,
                                             maxLines: 4,
                                             validator: (value){
                                               if(value == null || value.isEmpty)
@@ -215,16 +217,17 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                               border: OutlineInputBorder(),
                                             ),
                                             controller: descField,
-                                            onChanged: (value){
-                                              if (value.isNotEmpty)
-                                                _formKey.currentState!.validate();
-                                            },
+                                            // onChanged: (value){
+                                            //   if (value.isNotEmpty)
+                                            //     _formKey.currentState!.validate();
+                                            // },
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               bottom: 20),
                                           child: TextFormField(
+                                            autovalidateMode: AutovalidateMode.onUserInteraction,
                                             validator: (value){
                                               if(value == null || value.isEmpty)
                                                 return "This field is required";
@@ -237,10 +240,10 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                               border: OutlineInputBorder(),
                                             ),
                                             controller: priceField,
-                                            onChanged: (value){
-                                              if (value.isNotEmpty)
-                                                _formKey.currentState!.validate();
-                                            },
+                                            // onChanged: (value){
+                                            //   if (value.isNotEmpty)
+                                            //     _formKey.currentState!.validate();
+                                            // },
                                             inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter.digitsOnly
                                             ],
