@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:restaurant_mobile_app/AllMenus.dart';
 import 'package:restaurant_mobile_app/CreateMenu.dart';
 import 'package:restaurant_mobile_app/Deletemenu.dart';
 import 'package:restaurant_mobile_app/UpdateMenu.dart';
 import 'package:restaurant_mobile_app/Utils/util.dart';
 
-void main() async {
+Future<void> main() async {
+  // Load dotenv
+  await dotenv.load(fileName: ".env");
+
   runApp(const MainApp());
 }
 
@@ -24,7 +28,7 @@ class _MainAppState extends State<MainApp> {
   @override
   void initState() {
     super.initState();
-    util.setApiAddress("192.168.1.12");
+    util.setApiAddress(dotenv.env["API_ADDRESS"]!);
     util.setIsActiveIndex(0);
     initMode();
   }
