@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Util {
 
+  // Shared Preferences //
   void setApiAddress(String value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("API_IP", value);
@@ -32,6 +33,6 @@ class Util {
     return prefs.getInt("isSelectedIndex")??0;
   }
 
-
+  // Other ..
 
 }
