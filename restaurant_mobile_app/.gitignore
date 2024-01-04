@@ -1,3 +1,6 @@
+# Custom Khip01
+*.env
+
 # Miscellaneous
 *.class
 *.log
