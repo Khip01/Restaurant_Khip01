@@ -12,7 +12,6 @@ import '../models/menu.dart';
   via my mobile phone to demonstrate my Android Application.
 */
 
-String ip = "";
 // If You have IP address for IP,
 // then set the default at the SharedPregerence in main.dart file
 // in initState
@@ -24,17 +23,15 @@ String ip = "";
 //   return ip;
 // }
 
-_loadRequirements() async {
-  Util util = new Util();
-  util.getApiAddress().then((apiIp){
-    ip = apiIp;
-  });
-}
+Util util = Util();
+
+Future<String> getAPI () => util.getApiAddress().then((api) => api);
 
 // GET API Req
 Future getMenusRequest() async {
-  await _loadRequirements();
-  final uri = Uri.parse("http://$ip:8081/api/Menus");
+  String api = await getAPI();
+
+  final uri = Uri.parse("${api}Menus");
   final response = await http.get(uri);
 
   // Check status Request
@@ -47,7 +44,8 @@ Future getMenusRequest() async {
 
 // POST API Req
 Future<Menu> postMenuRequest(String menuName, String description, int price) async {
-  _loadRequirements();
+  String api = await getAPI();
+
   // Declare Map for store the data value
   Map<String, dynamic> request = {
     "menu_name": menuName,
@@ -55,11 +53,11 @@ Future<Menu> postMenuRequest(String menuName, String description, int price) asy
     "price": price,
   };
 
-  final uri = Uri.parse("http://$ip:8081/api/Menu");
+  final uri = Uri.parse("${api}Menu");
   final response = await http.post(uri, body: json.encode(request));
 
   // Check status Request
-  if (response.statusCode == 201) {
+  if (response.statusCode == 200) {
     return Menu.fromJson(json.decode(response.body));
   }
 
@@ -68,8 +66,9 @@ Future<Menu> postMenuRequest(String menuName, String description, int price) asy
 
 // UPDATE API Req
 Future<Menu> updateMenuRequest(
-    String id, String menuName, String description, int price) async {
-  await _loadRequirements();
+    int id, String menuName, String description, int price) async {
+  String api = await getAPI();
+
   // Declare Map for store the data value
   Map<String, dynamic> request = {
     "menu_name": menuName,
@@ -77,8 +76,8 @@ Future<Menu> updateMenuRequest(
     "price": price,
   };
 
-  final uri = Uri.parse("http://$ip:8081/api/Menu/" + id);
-  final response = await http.put(uri, body: request);
+  final uri = Uri.parse("${api}Menu/${id}");
+  final response = await http.put(uri, body: json.encode(request));
 
 // Check status Request
   if (response.statusCode == 200) {
@@ -89,9 +88,10 @@ Future<Menu> updateMenuRequest(
 }
 
 // DELETE API Req
-Future<Menu?>? deleteMenuRequest(String id) async {
-  await _loadRequirements();
-  final uri = Uri.parse("http://$ip:8081/api/Menu/" + id);
+Future<Menu?>? deleteMenuRequest(int id) async {
+  String api = await getAPI();
+
+  final uri = Uri.parse("${api}Menu/${id}");
   final response = await http.delete(uri);
 
   // Check status Request
