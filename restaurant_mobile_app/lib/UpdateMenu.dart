@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:restaurant_mobile_app/ShowUpdateMenu.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/type_menu_dummy.dart';
+import 'package:shimmer/shimmer.dart';
 
 class UpdateMenu extends StatefulWidget {
   @override
@@ -22,11 +24,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
     // Mengurutkan berdasarkan abjad
     typeMenuDummy.typeMenu.sort((a, b) => a["Type"].compareTo(b["Type"]));
     // Menyortir kembali daftar setelah mengubah nilai
-    typeMenuDummy.typeMenu.sort((a, b) => (a["isSelected"] == b["isSelected"])
-        ? 0
-        : a["isSelected"]
-            ? -1
-            : 1);
+    typeMenuDummy.typeMenu.sort((a, b) => (a["isSelected"] == b["isSelected"]) ? 0 : a["isSelected"] ? -1 : 1);
     super.initState();
   }
 
@@ -59,7 +57,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
       // yield* controller.stream;
 
       // METHOD 2
-      await Future.delayed(Duration(seconds: 1));
+      await Future.delayed(Duration(milliseconds: 500));
 
       try {
         Map menu = await getMenusRequest();
@@ -105,14 +103,142 @@ class _UpdateMenuState extends State<UpdateMenu> {
   }
 
   Widget ErrorUpdatePage() {
-    return SizedBox(
-      child: Text("Ini Error"),
+    return Container(
+      child: Stack(children: [
+        Positioned.fill(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Text(
+                      "404\nNOT FOUND",
+                      textAlign: TextAlign.center,
+                      style:
+                      TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
+                    )),
+                SvgPicture.asset(
+                  'assets/NotFound.svg',
+                  semanticsLabel: 'Not Found 404',
+                  width: 300,
+                ),
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Text(
+                      "Failed to load the data, check the API connection!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
   }
 
   Widget ShimmerUpdatePage() {
-    return SizedBox(
-      child: Text("Ini Shimmer"),
+    return Container(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Flexible(
+          flex: 8,
+          child: ListView.builder(
+            itemCount: 4,
+            itemBuilder: (context, snapshot) {
+              return Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                    height: 185,
+                    child: Card(
+                      clipBehavior: Clip.antiAlias,
+                      elevation: 5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            flex: 3,
+                            child: Container(
+                              // padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                              // child: Column(
+                              //   crossAxisAlignment: CrossAxisAlignment.start,
+                              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                // children: [
+                                  // Text(
+                                  //   isApiMode
+                                  //       ? snapshot?.data["All Menu"][index]
+                                  //   ["menu_name"]
+                                  //       : menuDummy.menu[index]["menu_name"],
+                                  //   style: TextStyle(
+                                  //       fontWeight: FontWeight.bold, fontSize: 20),
+                                  // ),
+                                  // Container(
+                                  //   height: 65,
+                                  //   child: Column(
+                                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                                  //     children: [
+                                  //       Text(
+                                  //         "Desc: ",
+                                  //         style: TextStyle(
+                                  //             fontWeight: FontWeight.bold),
+                                  //       ),
+                                  //       Text(
+                                  //         isApiMode
+                                  //             ? snapshot?.data["All Menu"][index]
+                                  //         ["description"]
+                                  //             : menuDummy.menu[index]
+                                  //         ["description"],
+                                  //         maxLines: 2,
+                                  //         overflow: TextOverflow.ellipsis,
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // Text(
+                                  //   "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
+                                  //   style: TextStyle(
+                                  //       fontSize: 14,
+                                  //       color: Colors.lightGreen,
+                                  //       fontWeight: FontWeight.bold),
+                                  // )
+                                // ],
+                              // ),
+                            ),
+                          ),
+                          // Flexible(
+                          //   flex: 1,
+                          //   child: Container(
+                              // height: double.maxFinite,
+                              // child: ElevatedButton(
+                              //   style: ElevatedButton.styleFrom(
+                              //       backgroundColor:
+                              //       Color.fromARGB(255, 198, 178, 169),
+                              //       shape: RoundedRectangleBorder(
+                              //           borderRadius: BorderRadius.circular(0))),
+                              //   child: Icon(
+                              //     Icons.edit_square,
+                              //     color: Colors.brown,
+                              //   ),
+                              //   onPressed: () => _showModalBottomSheet(context,
+                              //       index, snapshot?.data["All Menu"][index]),
+                              // ),
+                          //   ),
+                          // )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 
@@ -123,7 +249,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: Column(
             children: [
-              SortSection(),
+              // SortSection(),
               ListViewBodySection(snapshot),
             ],
           ),
@@ -247,7 +373,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                     : Colors.brown,
               ),
               onPressed: () {
-                setState(() {
+                // setState(() {
                   // Set isSelected untuk item yang ditekan
                   typeMenuDummy.typeMenu[index]["isSelected"] =
                       !typeMenuDummy.typeMenu[index]["isSelected"];
@@ -261,7 +387,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                           : a["isSelected"]
                               ? -1
                               : 1);
-                });
+                // });
               },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -401,4 +527,6 @@ class _UpdateMenuState extends State<UpdateMenu> {
       },
     );
   }
+
+
 }
