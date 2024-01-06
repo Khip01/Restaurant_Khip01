@@ -21,9 +21,26 @@ class _DeleteMenuState extends State<DeleteMenu> {
 
   bool isApiMode = true;
 
+  Stream<Map> getMenuStream() async* {
+    while (true) {
+      // Delay
+      await Future.delayed(Duration(milliseconds: 500));
+      try {
+        Map menus = await getMenusRequest();
+        yield menus;
+      } catch (e) {
+        throw Exception("Error fetching menus: $e");
+      }
+    }
+  }
+
+  void waitDeleteMenu(AsyncSnapshot snapshot, int index) async {
+    await deleteMenuRequest(snapshot.data["All Menu"][index]["id"]);
+  }
+
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getMenusRequest(),
+    return StreamBuilder(
+      stream: getMenuStream(),
       builder: (context, snapshot) {
         if (isApiMode) {
           if (snapshot.hasError) {
@@ -46,7 +63,7 @@ class _DeleteMenuState extends State<DeleteMenu> {
     );
   }
 
-  Widget DeletePage([AsyncSnapshot? snapshot]){
+  Widget DeletePage([AsyncSnapshot? snapshot]) {
     return Container(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: Column(
@@ -61,7 +78,7 @@ class _DeleteMenuState extends State<DeleteMenu> {
           ),
           Flexible(
             flex: 6,
-            child: BodySection(),
+            child: BodySection(snapshot),
           ),
         ],
       ),
@@ -105,44 +122,48 @@ class _DeleteMenuState extends State<DeleteMenu> {
                         child: Card(
                           clipBehavior: Clip.antiAlias,
                           elevation: 5,
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    menuDummy.menu[index]["menu_name"],
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold, fontSize: 20),
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  menuDummy.menu[index]["menu_name"],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20),
+                                ),
+                                Container(
+                                  height: 65,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Desc: ",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        menuDummy.menu[index]["description"],
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
                                   ),
-                                  Container(
-                                    height: 65,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Desc: ",
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          menuDummy.menu[index]["description"],
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Text(
-                                    "Rp. " + menuDummy.menu[index]["price"].toString(),
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.lightGreen,
-                                        fontWeight: FontWeight.bold),
-                                  )
-                                ],
-                              ),
+                                ),
+                                Text(
+                                  "Rp. " +
+                                      menuDummy.menu[index]["price"].toString(),
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.lightGreen,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
+                          ),
                           // ),
                         ),
                       ),
@@ -157,38 +178,61 @@ class _DeleteMenuState extends State<DeleteMenu> {
     );
   }
 
-  Widget BodySection() {
+  Widget BodySection([AsyncSnapshot? snapshot]) {
     return ListView.builder(
-      itemCount: menuDummy.menu.length,
+      itemCount:
+          isApiMode ? snapshot?.data["All Menu"].length : menuDummy.menu.length,
       itemBuilder: (BuildContext context, int index) {
         return Column(
           children: [
             Container(
               margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
               height: 180,
+              width: double.maxFinite,
               child: Card(
                 clipBehavior: Clip.antiAlias,
                 elevation: 5,
                 child: Dismissible(
-                  key: Key(menuDummy.menu[index]["menu_name"]),
+                  key: Key(isApiMode
+                      ? snapshot?.data["All Menu"][index]["menu_name"]
+                      : menuDummy.menu[index]["menu_name"]),
                   onDismissed: (DismissDirection direction) {
-                    setState(() {
-                      Map deletedMenu = menuDummy.menu.removeAt(index);
-                      ScaffoldMessenger.of(context)
-                        ..removeCurrentSnackBar()
-                        ..showSnackBar(
-                          SnackBar(
-                            behavior: SnackBarBehavior.floating,
-                            content:
-                                Text("${deletedMenu["menu_name"]} Deleted"),
-                            action: SnackBarAction(
-                                label: "UNDO",
-                                onPressed: () => setState(() {
-                                      menuDummy.menu.insert(index, deletedMenu);
-                                    })),
+                    if (isApiMode) {
+                      waitDeleteMenu(snapshot!, index);
+                    }
+                    Map? deletedMenu = isApiMode
+                        ? snapshot?.data["All Menu"][index]
+                        : menuDummy.menu.removeAt(index);
+                    ScaffoldMessenger.of(context)
+                      ..removeCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          content: Text(
+                              "${deletedMenu!["menu_name"]} have been Deleted"),
+                          action: SnackBarAction(
+                            label: "UNDO",
+                            onPressed: () => setState(() {
+                              if (isApiMode) {
+                                postMenuRequest(
+                                    deletedMenu["menu_name"],
+                                    deletedMenu["description"],
+                                    deletedMenu["price"]);
+                              } else {
+                                menuDummy.menu.insert(index, deletedMenu);
+                              }
+                              ScaffoldMessenger.of(context)
+                                ..showSnackBar(
+                                  SnackBar(
+                                    behavior: SnackBarBehavior.floating,
+                                    content: Text(
+                                        "${deletedMenu["menu_name"]} have been Restored"),
+                                  ),
+                                );
+                            }),
                           ),
-                        );
-                    });
+                        ),
+                      );
                   },
                   direction: DismissDirection.endToStart,
                   background: Container(
@@ -237,7 +281,9 @@ class _DeleteMenuState extends State<DeleteMenu> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          menuDummy.menu[index]["menu_name"],
+                          isApiMode
+                              ? snapshot?.data["All Menu"][index]["menu_name"]
+                              : menuDummy.menu[index]["menu_name"],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -251,7 +297,10 @@ class _DeleteMenuState extends State<DeleteMenu> {
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                menuDummy.menu[index]["description"],
+                                isApiMode
+                                    ? snapshot?.data["All Menu"][index]
+                                        ["description"]
+                                    : menuDummy.menu[index]["description"],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -259,7 +308,7 @@ class _DeleteMenuState extends State<DeleteMenu> {
                           ),
                         ),
                         Text(
-                          "Rp. " + menuDummy.menu[index]["price"].toString(),
+                          "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.lightGreen,
