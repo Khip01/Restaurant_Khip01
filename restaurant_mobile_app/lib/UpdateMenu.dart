@@ -164,71 +164,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
                           Flexible(
                             flex: 3,
                             child: Container(
-                              // padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                              // child: Column(
-                              //   crossAxisAlignment: CrossAxisAlignment.start,
-                              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                // children: [
-                                  // Text(
-                                  //   isApiMode
-                                  //       ? snapshot?.data["All Menu"][index]
-                                  //   ["menu_name"]
-                                  //       : menuDummy.menu[index]["menu_name"],
-                                  //   style: TextStyle(
-                                  //       fontWeight: FontWeight.bold, fontSize: 20),
-                                  // ),
-                                  // Container(
-                                  //   height: 65,
-                                  //   child: Column(
-                                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                                  //     children: [
-                                  //       Text(
-                                  //         "Desc: ",
-                                  //         style: TextStyle(
-                                  //             fontWeight: FontWeight.bold),
-                                  //       ),
-                                  //       Text(
-                                  //         isApiMode
-                                  //             ? snapshot?.data["All Menu"][index]
-                                  //         ["description"]
-                                  //             : menuDummy.menu[index]
-                                  //         ["description"],
-                                  //         maxLines: 2,
-                                  //         overflow: TextOverflow.ellipsis,
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  // Text(
-                                  //   "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
-                                  //   style: TextStyle(
-                                  //       fontSize: 14,
-                                  //       color: Colors.lightGreen,
-                                  //       fontWeight: FontWeight.bold),
-                                  // )
-                                // ],
-                              // ),
                             ),
                           ),
-                          // Flexible(
-                          //   flex: 1,
-                          //   child: Container(
-                              // height: double.maxFinite,
-                              // child: ElevatedButton(
-                              //   style: ElevatedButton.styleFrom(
-                              //       backgroundColor:
-                              //       Color.fromARGB(255, 198, 178, 169),
-                              //       shape: RoundedRectangleBorder(
-                              //           borderRadius: BorderRadius.circular(0))),
-                              //   child: Icon(
-                              //     Icons.edit_square,
-                              //     color: Colors.brown,
-                              //   ),
-                              //   onPressed: () => _showModalBottomSheet(context,
-                              //       index, snapshot?.data["All Menu"][index]),
-                              // ),
-                          //   ),
-                          // )
                         ],
                       ),
                     ),
