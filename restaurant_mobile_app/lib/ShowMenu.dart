@@ -13,7 +13,6 @@ class ShowMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("Hai");
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
       child: Scaffold(

@@ -33,7 +33,6 @@ class _AllMenusState extends State<AllMenus> {
     util.getIsApiMode().then((value) {
       setState(() {
         isApiMode = value;
-        // debugPrint(value.toString());
       });
     });
   }
@@ -45,11 +44,9 @@ class _AllMenusState extends State<AllMenus> {
     Util util = Util();
 
     // initMode(); // Mengecek secara terus menerus kondisi dari isApiMode (Tetapi akan setState Terus ke Widget  dan mengakibatkan spam di permintaan request ke API getMenusRequest())
-    debugPrint("Hai");
     util.getApiAddress().then((value) => debugPrint("Get Request at ${value}"));
     isApiMode = true; // development mode to test both isApiMode Swicth
 
-    // debugPrint(isApiMode.toString());
     if (isApiMode) {
       return FutureBuilder(
         future: getMenusRequest(),

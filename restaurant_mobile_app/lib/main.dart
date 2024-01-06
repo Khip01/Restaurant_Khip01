@@ -65,7 +65,6 @@ class _MainAppState extends State<MainApp> {
     util.getIsApiMode().then((value) {
       setState(() {
         switchIsApiMode = value;
-        // debugPrint(value.toString());
       });
     });
     // Init SelectedIndex
