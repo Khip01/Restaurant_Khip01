@@ -1,4 +1,4 @@
-# Restaurant_Khip01 (ON GOING)
+# Restaurant_Khip01
 
 <img alt="Static Badge" src="https://img.shields.io/badge/Type-Tool%2FAlat (API)-blue?style=flat&color=cyan"> ![](https://img.shields.io/badge/Type-Desktop%20App%2FAplikasi%20Desktop-purple) <img src="https://img.shields.io/badge/Type-Mobile App%2FAplikasi Mobile-green" alt="Type : App/Aplikasi">
 
