@@ -24,7 +24,11 @@ class _UpdateMenuState extends State<UpdateMenu> {
     // Mengurutkan berdasarkan abjad
     typeMenuDummy.typeMenu.sort((a, b) => a["Type"].compareTo(b["Type"]));
     // Menyortir kembali daftar setelah mengubah nilai
-    typeMenuDummy.typeMenu.sort((a, b) => (a["isSelected"] == b["isSelected"]) ? 0 : a["isSelected"] ? -1 : 1);
+    typeMenuDummy.typeMenu.sort((a, b) => (a["isSelected"] == b["isSelected"])
+        ? 0
+        : a["isSelected"]
+            ? -1
+            : 1);
     super.initState();
   }
 
@@ -64,7 +68,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
         yield menu;
       } catch (e) {
         // Handle error jika terjadi
-        throw("Error fetching menus: $e");
+        throw ("Error fetching menus: $e");
       }
     }
   }
@@ -117,7 +121,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                       "404\nNOT FOUND",
                       textAlign: TextAlign.center,
                       style:
-                      TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
                     )),
                 SvgPicture.asset(
                   'assets/NotFound.svg',
@@ -145,35 +149,31 @@ class _UpdateMenuState extends State<UpdateMenu> {
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
         highlightColor: Colors.grey.shade100,
-        child: Flexible(
-          flex: 8,
-          child: ListView.builder(
-            itemCount: 4,
-            itemBuilder: (context, snapshot) {
-              return Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
-                    height: 185,
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      elevation: 5,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            flex: 3,
-                            child: Container(
-                            ),
-                          ),
-                        ],
-                      ),
+        child: ListView.builder(
+          itemCount: 4,
+          itemBuilder: (context, snapshot) {
+            return Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 5, 0, 10),
+                  height: 185,
+                  child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    elevation: 5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: Container(),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              );
-            },
-          ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -311,19 +311,19 @@ class _UpdateMenuState extends State<UpdateMenu> {
               ),
               onPressed: () {
                 // setState(() {
-                  // Set isSelected untuk item yang ditekan
-                  typeMenuDummy.typeMenu[index]["isSelected"] =
-                      !typeMenuDummy.typeMenu[index]["isSelected"];
-                  // Mengurutkan berdasarkan abjad
-                  typeMenuDummy.typeMenu
-                      .sort((a, b) => a["Type"].compareTo(b["Type"]));
-                  // Menyortir kembali daftar setelah mengubah nilai
-                  typeMenuDummy.typeMenu
-                      .sort((a, b) => (a["isSelected"] == b["isSelected"])
-                          ? 0
-                          : a["isSelected"]
-                              ? -1
-                              : 1);
+                // Set isSelected untuk item yang ditekan
+                typeMenuDummy.typeMenu[index]["isSelected"] =
+                    !typeMenuDummy.typeMenu[index]["isSelected"];
+                // Mengurutkan berdasarkan abjad
+                typeMenuDummy.typeMenu
+                    .sort((a, b) => a["Type"].compareTo(b["Type"]));
+                // Menyortir kembali daftar setelah mengubah nilai
+                typeMenuDummy.typeMenu
+                    .sort((a, b) => (a["isSelected"] == b["isSelected"])
+                        ? 0
+                        : a["isSelected"]
+                            ? -1
+                            : 1);
                 // });
               },
               child: Row(
@@ -409,21 +409,20 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                   Navigator.pop(context);
                                   Navigator.push(
                                     context,
-
                                     MaterialPageRoute(
                                         builder: (BuildContext context) {
-                                          return ShowUpdateMenu(
-                                            indexMenu: index,
-                                            menu: menu,
-                                          );
-                                        }),
-                                  ).then((val){
-                                    setState((){});
+                                      return ShowUpdateMenu(
+                                        indexMenu: index,
+                                        menu: menu,
+                                      );
+                                    }),
+                                  ).then((val) {
+                                    setState(() {});
                                   });
                                 },
                                 child: Padding(
                                   padding:
-                                  const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                                      const EdgeInsets.fromLTRB(30, 15, 30, 15),
                                   child: Text(
                                     "Update",
                                     style: TextStyle(color: Colors.white),
@@ -443,7 +442,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                                 },
                                 child: Padding(
                                   padding:
-                                  const EdgeInsets.fromLTRB(30, 15, 30, 15),
+                                      const EdgeInsets.fromLTRB(30, 15, 30, 15),
                                   child: Text(
                                     "Cancle",
                                     style: TextStyle(color: Colors.white),
@@ -464,6 +463,4 @@ class _UpdateMenuState extends State<UpdateMenu> {
       },
     );
   }
-
-
 }
