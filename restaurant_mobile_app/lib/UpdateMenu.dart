@@ -64,8 +64,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
       await Future.delayed(Duration(milliseconds: 500));
 
       try {
-        Map menu = await getMenusRequest();
-        yield menu;
+        Map menus = await getMenusRequest();
+        yield menus;
       } catch (e) {
         // Handle error jika terjadi
         throw ("Error fetching menus: $e");
