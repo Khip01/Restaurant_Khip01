@@ -42,7 +42,7 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
         .showSnackBar(
       SnackBar(
         content: const Text(
-            "Data added Successfully! (Later :p)"),
+            "Data added Successfully!"),
         behavior:
         SnackBarBehavior.floating,
       ),
