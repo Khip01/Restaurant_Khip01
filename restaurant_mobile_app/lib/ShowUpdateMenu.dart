@@ -52,7 +52,7 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
     // Show SnackBar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(isDataChanged ? "Data Updated Successfully!" : "You have not changed any data"),
+        content: Text(isDataChanged ? "Data Updated Successfully!" : "No changes made"),
         behavior: SnackBarBehavior.floating,
       ),
     );
