@@ -27,6 +27,14 @@ const List<String> filterList = <String>[
   "highest price"
 ];
 
+// NOTE: this is really important, it will make overscroll look the same on both platforms
+// sc : https://stackoverflow.com/a/73986079/20483243
+class _ClampingScrollBehavior extends ScrollBehavior {
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) =>
+      ClampingScrollPhysics();
+}
+
 class _AllMenusState extends State<AllMenus> {
   // Init untuk mengubah IsApiMode
   void initMode() {
@@ -48,21 +56,51 @@ class _AllMenusState extends State<AllMenus> {
     isApiMode = true; // development mode to test both isApiMode Swicth
 
     if (isApiMode) {
-      return FutureBuilder(
-        future: getMenusRequest(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return AllMenuPageError();
-          } else if (snapshot.hasData) {
-            return AllMenuPage(isApiMode, snapshot);
-          } else
-            return ShimmerAllMenu(context);
-        },
-      );
+      return RefreshablePage();
     } else {
       //// IF IS API MODE FALSE
       return AllMenuPage(isApiMode);
     }
+  }
+
+  Widget RefreshablePage() {
+    // Setting for page that can be refreshed on both device Android || IOS
+    return LayoutBuilder(builder: (_, constraint) {
+      return RefreshIndicator(
+        onRefresh: () async {
+          setState(() {});
+          await Future.delayed(Duration(milliseconds: 500));
+          // return getMenusRequest();
+        },
+        child: ScrollConfiguration(
+          behavior: _ClampingScrollBehavior(),
+          child: SingleChildScrollView(
+            // Set Page can be scroll (coz Refreshable need Scroll behavior)
+            physics: AlwaysScrollableScrollPhysics(),
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                  minHeight: constraint.maxHeight,
+                  maxHeight: constraint.maxHeight),
+              child: MainPage(),
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget MainPage() {
+    return FutureBuilder(
+      future: getMenusRequest(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return AllMenuPageError();
+        } else if (snapshot.hasData) {
+          return AllMenuPage(isApiMode, snapshot);
+        } else
+          return ShimmerAllMenu(context);
+      },
+    );
   }
 
   Widget carouselShow(BuildContext context, bool isShimmer) {
@@ -159,13 +197,14 @@ class _AllMenusState extends State<AllMenus> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 24),
                             ),
-                            SizedBox(height: 25,child: Center(child: Text("Let's look at some menus!"))),
+                            SizedBox(
+                                height: 25,
+                                child: Center(
+                                    child: Text("Let's look at some menus!"))),
                           ],
                         ),
                       ),
-                      SizedBox(
-                          height: 60,
-                          child: FilterSection()),
+                      SizedBox(height: 60, child: FilterSection()),
                     ],
                   ),
                 ),
@@ -391,7 +430,10 @@ class _AllMenusState extends State<AllMenus> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        SizedBox(height: 25,child: Center(child: Text("Sort by")),),
+        SizedBox(
+          height: 25,
+          child: Center(child: Text("Sort by")),
+        ),
         SizedBox(
           height: 25,
           child: DropdownButton(
