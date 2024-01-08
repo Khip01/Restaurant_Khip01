@@ -1,4 +1,4 @@
-# Restaurant_Khip01 (ON GOING)
+# Restaurant_Khip01
 
 <img alt="Static Badge" src="https://img.shields.io/badge/Type-Tool%2FAlat (API)-blue?style=flat&color=cyan"> ![](https://img.shields.io/badge/Type-Desktop%20App%2FAplikasi%20Desktop-purple) <img src="https://img.shields.io/badge/Type-Mobile App%2FAplikasi Mobile-green" alt="Type : App/Aplikasi">
 
@@ -20,7 +20,7 @@ Required Software:
     - Go Extexsion *optional
 - [x]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Desktop App (C#/.NET 5) 
     - Visual Studio 2019
-- [ ] **[ ON GOING ]** Mobile App (Dart/Flutter) 
+- [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Mobile App (Dart/Flutter) 
     - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
     - Flutter Extension *optional
 - [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Database (SQLServer) 
@@ -46,6 +46,7 @@ New Validation Style! <br>
 Take a peek 👀 <br>
 ![]() <br>
 <img src="https://github.com/Khip01/Restaurant_Khip01/blob/main/src/Mobile-App_Sneak-Peek.jpg" alt="Mobile-App_Sneak-Peek" height="700"/>
+<img src="https://github.com/Khip01/Restaurant_Khip01/blob/main/src/Mobile-App_Sneak-Peek2.jpg" alt="Mobile-App_Sneak-Peek2" height="700"/>
 
 ## Instruction:
 - Clone this repo OR see the Release.
@@ -55,8 +56,8 @@ Take a peek 👀 <br>
 
 ---
 
-> IMPORTANT \
-> There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
+> **IMPORTANT** \
+> [API NEEDS] There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
 
 # Use
 [![My Skills](https://skillicons.dev/icons?i=go,vscode,cs,dotnet,visualstudio,dart,flutter,androidstudio)](https://github.com/Khip01)
