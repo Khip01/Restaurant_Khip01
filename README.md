@@ -52,7 +52,7 @@ Take a peek 👀 <br>
 - Clone this repo OR see the Release.
 - [DATABASE] In your database, create database named  **db_Restaurant_Khip01** (or you can change the name in setup.go). Then Migrate it with ```go run main.go``` on your terminal.
 - [DESKTOP APP] You can open .sln file/run the installer app.
-- [MOBILE APP] Just run the application via vscode/android studio/terminal.
+- [MOBILE APP] Just run the application via vscode/android studio/terminal. ***Don't forget to change your API Endpoint in .env***
 
 ---
 
