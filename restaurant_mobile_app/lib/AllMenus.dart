@@ -225,7 +225,7 @@ class _AllMenusState extends State<AllMenus> {
                               return ShowMenu(
                                 menu: isAPIMode == true
                                     ? snapshot?.data["All Menu"][index]
-                                    : menuDummy.menu[index],
+                                    : menuDummy.menu[index], dataMenu: snapshot?.data,
                                 isApiMode: isAPIMode,
                               );
                             },

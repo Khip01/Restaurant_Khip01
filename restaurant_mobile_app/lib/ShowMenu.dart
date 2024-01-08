@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -8,8 +7,9 @@ class ShowMenu extends StatelessWidget {
   // Product from All Menus Dart
   final Map menu;
   final bool isApiMode;
+  final Map dataMenu;
 
-  ShowMenu({required this.menu, required this.isApiMode});
+  ShowMenu({required this.menu, required this.isApiMode, required this.dataMenu});
 
   @override
   Widget build(BuildContext context) {
@@ -103,25 +103,25 @@ class ShowMenu extends StatelessWidget {
 
   Widget OtherMenuSectionBody() {
     if (isApiMode) {
-      return FutureBuilder(
-        future: getMenusRequest(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return LoadOtherMenuSectionBody(snapshot);
-          } else {
-            if (snapshot.hasError) {
-              return OtherMenuSectionError();
-            }
-            return ShimmerOtherMenuSection();
-          }
-        },
-      );
+      // return ListView.builder(
+      //   itemCount: dataMenu["All Menu"].length,
+      //   itemBuilder: (context, index) {
+          // if (snapshot.hasData) {
+            return LoadOtherMenuSectionBody();
+          // } else {
+          //   if (snapshot.hasError) {
+          //     return OtherMenuSectionError();
+          //   }
+          //   return ShimmerOtherMenuSection();
+          // }
+      //   },
+      // );
     } else {
       return LoadOtherMenuSectionBody();
     }
   }
 
-  Widget LoadOtherMenuSectionBody([AsyncSnapshot<dynamic>? snapshot]) {
+  Widget LoadOtherMenuSectionBody() {
     MenuDummy menuDummy = MenuDummy();
 
     return Container(
@@ -131,11 +131,11 @@ class ShowMenu extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: isApiMode == false
             ? menuDummy.menu.length
-            : snapshot?.data["All Menu"].length,
+            : dataMenu["All Menu"].length,
         itemBuilder: (BuildContext context, int i) {
           if ((isApiMode == false
                   ? menuDummy.menu[i]["menu_name"]
-                  : snapshot?.data["All Menu"][i]["menu_name"]) !=
+                  : dataMenu["All Menu"][i]["menu_name"]) !=
               menu["menu_name"]) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
@@ -147,8 +147,8 @@ class ShowMenu extends StatelessWidget {
                       builder: (value) => ShowMenu(
                           menu: isApiMode == false
                               ? menuDummy.menu[i]
-                              : snapshot?.data["All Menu"][i],
-                          isApiMode: isApiMode),
+                              : dataMenu["All Menu"][i],
+                          isApiMode: isApiMode, dataMenu: dataMenu,),
                     ),
                   );
                 },
@@ -166,14 +166,14 @@ class ShowMenu extends StatelessWidget {
                         Text(
                           isApiMode == false
                               ? menuDummy.menu[i]["menu_name"]
-                              : snapshot?.data["All Menu"][i]["menu_name"],
+                              : dataMenu["All Menu"][i]["menu_name"],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         Text(
                           isApiMode == false
                               ? menuDummy.menu[i]["description"]
-                              : snapshot?.data["All Menu"][i]["description"],
+                              : dataMenu["All Menu"][i]["description"],
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -181,7 +181,7 @@ class ShowMenu extends StatelessWidget {
                           "Rp. " +
                               (isApiMode == false
                                       ? menuDummy.menu[i]["price"]
-                                      : snapshot?.data["All Menu"][i]["price"])
+                                      : dataMenu["All Menu"][i]["price"])
                                   .toString(),
                           style: TextStyle(
                               fontSize: 14,
