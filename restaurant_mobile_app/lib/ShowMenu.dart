@@ -7,7 +7,7 @@ class ShowMenu extends StatelessWidget {
   // Product from All Menus Dart
   final Map menu;
   final bool isApiMode;
-  final Map dataMenu;
+  final Map? dataMenu;
 
   ShowMenu({required this.menu, required this.isApiMode, required this.dataMenu});
 
@@ -131,11 +131,11 @@ class ShowMenu extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: isApiMode == false
             ? menuDummy.menu.length
-            : dataMenu["All Menu"].length,
+            : dataMenu?["All Menu"].length,
         itemBuilder: (BuildContext context, int i) {
           if ((isApiMode == false
                   ? menuDummy.menu[i]["menu_name"]
-                  : dataMenu["All Menu"][i]["menu_name"]) !=
+                  : dataMenu?["All Menu"][i]["menu_name"]) !=
               menu["menu_name"]) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 16, 0),
@@ -147,7 +147,7 @@ class ShowMenu extends StatelessWidget {
                       builder: (value) => ShowMenu(
                           menu: isApiMode == false
                               ? menuDummy.menu[i]
-                              : dataMenu["All Menu"][i],
+                              : dataMenu?["All Menu"][i],
                           isApiMode: isApiMode, dataMenu: dataMenu,),
                     ),
                   );
@@ -166,14 +166,14 @@ class ShowMenu extends StatelessWidget {
                         Text(
                           isApiMode == false
                               ? menuDummy.menu[i]["menu_name"]
-                              : dataMenu["All Menu"][i]["menu_name"],
+                              : dataMenu?["All Menu"][i]["menu_name"],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         Text(
                           isApiMode == false
                               ? menuDummy.menu[i]["description"]
-                              : dataMenu["All Menu"][i]["description"],
+                              : dataMenu?["All Menu"][i]["description"],
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
@@ -181,7 +181,7 @@ class ShowMenu extends StatelessWidget {
                           "Rp. " +
                               (isApiMode == false
                                       ? menuDummy.menu[i]["price"]
-                                      : dataMenu["All Menu"][i]["price"])
+                                      : dataMenu?["All Menu"][i]["price"])
                                   .toString(),
                           style: TextStyle(
                               fontSize: 14,
