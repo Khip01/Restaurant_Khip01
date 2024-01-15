@@ -15,6 +15,7 @@ dependencies:
   shared_preferences: ^2.2.2
   carousel_slider: ^4.2.1
   flutter_dotenv: ^5.1.0
+  flutter_riverpod: ^2.4.9
 
 dev_dependencies:
   flutter_test:
