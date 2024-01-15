@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
+import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 
 import 'Utils/util.dart';
 
-class ShowCreateMenu extends StatefulWidget {
+class ShowCreateMenu extends ConsumerStatefulWidget {
   ShowCreateMenu({Key? key}) : super(key: key);
 
   @override
-  State<ShowCreateMenu> createState() => _ShowCreateMenuState();
+  ConsumerState<ShowCreateMenu> createState() => _ShowCreateMenuState();
 }
 
-class _ShowCreateMenuState extends State<ShowCreateMenu> {
-  Util util = new Util();
+class _ShowCreateMenuState extends ConsumerState<ShowCreateMenu> {
+  Util util = Util();
+  MenuDummy menuDummy = MenuDummy();
 
   final nameField = TextEditingController();
   final descField = TextEditingController();
@@ -20,13 +24,20 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void _submit(){
+  void submit(){
     // Mengubah Index yang aktif
     setState(() {
-      postMenuRequest(
-          nameField.text,
-          descField.text,
-          int.parse(priceField.text));
+      ref.watch(isAPIMode) == true
+          ? postMenuRequest(nameField.text, descField.text, int.parse(priceField.text))
+          : () {
+            Map<dynamic, dynamic> sendData = {
+              "menu_name": nameField.text,
+              "description": descField.text,
+              "price": priceField.text
+            };
+            menuDummy.menu.add(sendData); // IDK why this didn't work , the data cannot be added
+            debugPrint("Data added when data is ${ref.watch(isAPIMode)} with data send ${sendData}");
+          }();
       util.setIsActiveIndex(0);
     });
     // Berpindah ke halaman AllMenus()
@@ -284,7 +295,7 @@ class _ShowCreateMenuState extends State<ShowCreateMenu> {
                                           ),
                                           onPressed: () {
                                             if (_formKey.currentState!.validate()) {
-                                              _submit();
+                                              submit();
                                             }
                                           },
                                           child: Padding(
