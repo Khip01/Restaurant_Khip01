@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant_mobile_app/Utils/util.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 
-class ShowUpdateMenu extends StatefulWidget {
+class ShowUpdateMenu extends ConsumerStatefulWidget {
   final int indexMenu;
   final Map? menu;
 
@@ -12,12 +14,12 @@ class ShowUpdateMenu extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<ShowUpdateMenu> createState() => _ShowUpdateMenuState();
+  ConsumerState<ShowUpdateMenu> createState() => _ShowUpdateMenuState();
 }
 
-bool isApiMode = true;
+// bool _isApiMode = true;
 
-class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
+class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
   Util util = new Util();
   MenuDummy menuDummy = new MenuDummy();
 
@@ -33,15 +35,24 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
 
   @override
   void initState() {
-    nameField.text = isApiMode ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
-    descField.text = isApiMode ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
-    priceField.text = isApiMode ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
+    nameField.text = ref.read(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
+    descField.text = ref.read(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
+    priceField.text = ref.read(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
     super.initState();
   }
 
   void _doUpdateData (bool isDataChanged) {
-    if (isApiMode && isDataChanged) {
+    if (ref.watch(isAPIMode) && isDataChanged) {
       updateMenuRequest(this.widget.menu?["id"], nameField.text, descField.text, int.parse(priceField.text));
+    } else if (!ref.watch(isAPIMode) && isDataChanged){
+      Map updatedData = {
+        // {"menu_name": "Bakso", "description": "${lorem}", "price": "9999"},
+        "menu_name": nameField.text,
+        "description": descField.text,
+        "price": priceField.text,
+      };
+      debugPrint("Updated with ${updatedData}");
+      menuDummy.menu[this.widget.indexMenu] = updatedData; // IDK why this is not make any change too :(
     }
     // Mengubah Index yang aktif
     setState(() {
@@ -59,9 +70,9 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
   }
 
   bool isFieldChanged () {
-    if (nameField.text != ((isApiMode) ? (this.widget.menu?["menu_name"]) : (menuDummy.menu[this.widget.indexMenu]["menu_name"])) ||
-        descField.text != ((isApiMode) ? (this.widget.menu?["description"]) : (menuDummy.menu[this.widget.indexMenu]["description"])) ||
-        priceField.text != ((isApiMode) ? (this.widget.menu?["price"]).toString() : (menuDummy.menu[this.widget.indexMenu]["price"]))
+    if (nameField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["menu_name"]) : (menuDummy.menu[this.widget.indexMenu]["menu_name"])) ||
+        descField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["description"]) : (menuDummy.menu[this.widget.indexMenu]["description"])) ||
+        priceField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["price"]).toString() : (menuDummy.menu[this.widget.indexMenu]["price"]))
     ) {
       return true;
     }
@@ -252,8 +263,7 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty)
-                      return "This field is required! "
-                          "";
+                      return "This field is required! ";
                     else
                       return null;
                   },
@@ -293,7 +303,7 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                   //     baseOffset: 0, extentOffset: nameField.text.length);
                   // },
                   onChanged: (value) {
-                    if (isApiMode) {
+                    if (ref.watch(isAPIMode)) {
                       if ((this.widget.menu?["menu_name"] == nameField.text) ||
                           value.isEmpty)
                         setState(() {
@@ -366,7 +376,7 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                   //       baseOffset: 0, extentOffset: descField.text.length);
                   // },
                   onChanged: (value) {
-                    if (isApiMode) {
+                    if (ref.watch(isAPIMode)) {
                       if ((this.widget.menu?["description"] ==
                               descField.text) ||
                           value.isEmpty)
@@ -443,7 +453,7 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   onChanged: (value) {
-                    if (isApiMode) {
+                    if (ref.watch(isAPIMode)) {
                       if ((this.widget.menu?["price"].toString() == priceField.text) ||
                           value.isEmpty)
                         setState(() {
@@ -498,7 +508,9 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                   elevation: 4.0,
                 ),
                 onPressed: () {
-                    _doUpdateData(isFieldChanged());
+                    if (_formKey.currentState!.validate()) {
+                      _doUpdateData(isFieldChanged());
+                    }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
@@ -523,13 +535,13 @@ class _ShowUpdateMenuState extends State<ShowUpdateMenu> {
                 onPressed: () {
                   setState(() {
                     nameField.text =
-                        isApiMode ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
                     nameIsWarning = false;
                     descField.text =
-                    isApiMode ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
                     descIsWarning = false;
                     priceField.text =
-                    isApiMode ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
                     priceIsWarning = false;
                   });
                   _formKey.currentState!.validate();
