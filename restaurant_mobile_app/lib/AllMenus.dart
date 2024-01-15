@@ -1,21 +1,22 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:restaurant_mobile_app/ShowMenu.dart';
 import 'package:restaurant_mobile_app/Utils/util.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 import 'package:restaurant_mobile_app/data_dummy/carousel_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-class AllMenus extends StatefulWidget {
+class AllMenus extends ConsumerStatefulWidget {
   @override
-  State<AllMenus> createState() => _AllMenusState();
+  ConsumerState<AllMenus> createState() => _AllMenusState();
 }
 
-bool isApiMode = true;
 Util util = new Util();
 
 // Dropdown Filter ----
@@ -30,21 +31,13 @@ const List<String> filterList = <String>[
 // NOTE: this is really important, it will make overscroll look the same on both platforms
 // sc : https://stackoverflow.com/a/73986079/20483243
 class _ClampingScrollBehavior extends ScrollBehavior {
+
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) =>
       ClampingScrollPhysics();
 }
 
-class _AllMenusState extends State<AllMenus> {
-  // Init untuk mengubah IsApiMode
-  void initMode() {
-    util.getIsApiMode().then((value) {
-      setState(() {
-        isApiMode = value;
-      });
-    });
-  }
-
+class _AllMenusState extends ConsumerState<AllMenus> {
   String filterValue = filterList.first;
 
   @override
@@ -53,7 +46,7 @@ class _AllMenusState extends State<AllMenus> {
 
     // initMode(); // Mengecek secara terus menerus kondisi dari isApiMode (Tetapi akan setState Terus ke Widget  dan mengakibatkan spam di permintaan request ke API getMenusRequest())
     util.getApiAddress().then((value) => debugPrint("Get Request at ${value}"));
-    isApiMode = true; // development mode to test both isApiMode Swicth
+    final isApiMode = ref.watch(isAPIMode);
 
     if (isApiMode) {
       return RefreshablePage();
@@ -96,7 +89,7 @@ class _AllMenusState extends State<AllMenus> {
         if (snapshot.hasError) {
           return AllMenuPageError();
         } else if (snapshot.hasData) {
-          return AllMenuPage(isApiMode, snapshot);
+          return AllMenuPage(ref.watch(isAPIMode), snapshot);
         } else
           return ShimmerAllMenu(context);
       },
@@ -225,7 +218,7 @@ class _AllMenusState extends State<AllMenus> {
                               return ShowMenu(
                                 menu: isAPIMode == true
                                     ? snapshot?.data["All Menu"][index]
-                                    : menuDummy.menu[index], dataMenu: snapshot?.data,
+                                    : menuDummy.menu[index], dataMenu: isAPIMode == true ? snapshot?.data : null,
                                 isApiMode: isAPIMode,
                               );
                             },
