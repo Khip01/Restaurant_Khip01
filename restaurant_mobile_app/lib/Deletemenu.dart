@@ -2,24 +2,24 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant_mobile_app/data_dummy/carousel_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/type_menu_dummy.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'controllers/menu_controller.dart';
 
-class DeleteMenu extends StatefulWidget {
+class DeleteMenu extends ConsumerStatefulWidget {
   @override
-  State<DeleteMenu> createState() => _DeleteMenuState();
+  ConsumerState<DeleteMenu> createState() => _DeleteMenuState();
 }
 
-class _DeleteMenuState extends State<DeleteMenu> {
+class _DeleteMenuState extends ConsumerState<DeleteMenu> {
   TypeMenuDummy typeMenuDummy = new TypeMenuDummy();
   MenuDummy menuDummy = new MenuDummy();
   CarouselDummy carouselDummy = new CarouselDummy();
-
-  bool isApiMode = true;
 
   Stream<Map> getMenuStream() async* {
     while (true) {
@@ -42,7 +42,7 @@ class _DeleteMenuState extends State<DeleteMenu> {
     return StreamBuilder(
       stream: getMenuStream(),
       builder: (context, snapshot) {
-        if (isApiMode) {
+        if (ref.watch(isAPIMode)) {
           if (snapshot.hasError) {
             return ErrorDeletePage();
           } else if (snapshot.hasData) {
@@ -179,6 +179,8 @@ class _DeleteMenuState extends State<DeleteMenu> {
   }
 
   Widget BodySection([AsyncSnapshot? snapshot]) {
+    bool isApiMode = ref.watch(isAPIMode);
+
     return ListView.builder(
       itemCount:
           isApiMode ? snapshot?.data["All Menu"].length : menuDummy.menu.length,
