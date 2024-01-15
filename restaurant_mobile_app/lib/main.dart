@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant_mobile_app/AllMenus.dart';
 import 'package:restaurant_mobile_app/CreateMenu.dart';
 import 'package:restaurant_mobile_app/Deletemenu.dart';
 import 'package:restaurant_mobile_app/UpdateMenu.dart';
 import 'package:restaurant_mobile_app/Utils/util.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 
 Future<void> main() async {
   // Load dotenv
   await dotenv.load(fileName: ".env");
 
-  runApp(const MainApp());
+  runApp(const ProviderScope(child: MainApp()));
 }
 
-bool switchIsApiMode = false; // Switch Mode
-
-class MainApp extends StatefulWidget {
+class MainApp extends ConsumerStatefulWidget {
   const MainApp({super.key});
 
   @override
-  State<MainApp> createState() => _MainAppState();
+  ConsumerState<MainApp> createState() => _MainAppState();
 }
 
-class _MainAppState extends State<MainApp> {
+class _MainAppState extends ConsumerState<MainApp> {
   Util util = new Util();
 
   @override
@@ -64,7 +64,7 @@ class _MainAppState extends State<MainApp> {
     // Init Is API Mode
     util.getIsApiMode().then((value) {
       setState(() {
-        switchIsApiMode = value;
+        ref.read(isAPIMode.notifier).state = value;
       });
     });
     // Init SelectedIndex
@@ -235,10 +235,10 @@ class _MainAppState extends State<MainApp> {
                     children: [
                       Switch(
                         thumbIcon: thumbIcon,
-                        value: switchIsApiMode,
+                        value: ref.watch(isAPIMode),
                         onChanged: (value) {
                           setState(() {
-                            switchIsApiMode = value;
+                            ref.read(isAPIMode.notifier).state = value;
                             util.setIsApiMode(value);
                           });
                         },
