@@ -1,21 +1,21 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:restaurant_mobile_app/ShowUpdateMenu.dart';
 import 'package:restaurant_mobile_app/controllers/menu_controller.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/type_menu_dummy.dart';
+import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class UpdateMenu extends StatefulWidget {
+class UpdateMenu extends ConsumerStatefulWidget {
   @override
-  State<UpdateMenu> createState() => _UpdateMenuState();
+  ConsumerState<UpdateMenu> createState() => _UpdateMenuState();
 }
 
-bool isApiMode = true;
-
-class _UpdateMenuState extends State<UpdateMenu> {
+class _UpdateMenuState extends ConsumerState<UpdateMenu> {
   MenuDummy menuDummy = new MenuDummy();
   TypeMenuDummy typeMenuDummy = new TypeMenuDummy();
 
@@ -74,6 +74,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
   }
 
   Widget build(BuildContext context) {
+    bool isApiMode = ref.watch(isAPIMode);
+
     if (isApiMode) {
       return StreamBuilder(
         stream: getMenuStream(),
@@ -196,6 +198,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
   }
 
   Widget ListViewBodySection(AsyncSnapshot? snapshot) {
+    bool isApiMode = ref.watch(isAPIMode);
+
     return Flexible(
       flex: 8,
       child: ListView.builder(
@@ -278,7 +282,7 @@ class _UpdateMenuState extends State<UpdateMenu> {
                               color: Colors.brown,
                             ),
                             onPressed: () => _showModalBottomSheet(context,
-                                index, snapshot?.data["All Menu"][index]),
+                                index, isApiMode == true ? snapshot?.data["All Menu"][index] : menuDummy.menu[index]),
                           ),
                         ),
                       )
@@ -351,6 +355,8 @@ class _UpdateMenuState extends State<UpdateMenu> {
   }
 
   void _showModalBottomSheet(BuildContext context, int index, Map? menu) {
+    bool isApiMode = ref.watch(isAPIMode);
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
