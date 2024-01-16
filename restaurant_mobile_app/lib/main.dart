@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:restaurant_mobile_app/AllMenus.dart';
 import 'package:restaurant_mobile_app/CreateMenu.dart';
 import 'package:restaurant_mobile_app/Deletemenu.dart';
+import 'package:restaurant_mobile_app/SettingsScreen.dart';
 import 'package:restaurant_mobile_app/UpdateMenu.dart';
 import 'package:restaurant_mobile_app/Utils/util.dart';
 import 'package:restaurant_mobile_app/provider/switch_api_provider.dart';
@@ -28,7 +29,9 @@ class _MainAppState extends ConsumerState<MainApp> {
   @override
   void initState() {
     super.initState();
-    util.setApiAddress(dotenv.env["API_ADDRESS"]!);
+    util.getApiAddress().then((value) => (value == "" || value.isEmpty)
+        ? util.setApiAddress(dotenv.env["API_ADDRESS"]!)
+        : null);
     util.setIsActiveIndex(0);
     initMode();
   }
@@ -40,7 +43,12 @@ class _MainAppState extends ConsumerState<MainApp> {
   List<bool> _isSelected = List.generate(4, (i) => i == 0);
 
   // List that use for declare Title
-  List<String> _titleApp = ["All Menu", "Create Menu", "Update Menu", "Delete Menu"];
+  List<String> _titleApp = [
+    "All Menu",
+    "Create Menu",
+    "Update Menu",
+    "Delete Menu"
+  ];
 
   // Declare state
   List<Widget> _bodies = [
@@ -60,7 +68,7 @@ class _MainAppState extends ConsumerState<MainApp> {
   }
 
   // Init untuk mengubah IsApiMode
-  void initMode(){
+  void initMode() {
     // Init Is API Mode
     util.getIsApiMode().then((value) {
       setState(() {
@@ -151,11 +159,12 @@ class _MainAppState extends ConsumerState<MainApp> {
                         children: [
                           ListTile(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             selected: _isSelected[0],
-                            selectedTileColor: Color.fromARGB(255, 175, 145, 140),
-                            leading: Image(image: AssetImage("assets/Index24.png")),
+                            selectedTileColor:
+                                Color.fromARGB(255, 175, 145, 140),
+                            leading:
+                                Image(image: AssetImage("assets/Index24.png")),
                             title: const Text(
                               "All Menus",
                               style: TextStyle(color: Colors.white),
@@ -174,7 +183,8 @@ class _MainAppState extends ConsumerState<MainApp> {
                             tileColor: _isSelected[1]
                                 ? Color.fromARGB(255, 175, 145, 140)
                                 : null,
-                            leading: Image(image: AssetImage("assets/Create24.png")),
+                            leading:
+                                Image(image: AssetImage("assets/Create24.png")),
                             title: const Text(
                               "Create Menu",
                               style: TextStyle(color: Colors.white),
@@ -188,12 +198,12 @@ class _MainAppState extends ConsumerState<MainApp> {
                           ),
                           ListTile(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             tileColor: _isSelected[2]
                                 ? Color.fromARGB(255, 175, 145, 140)
                                 : null,
-                            leading: Image(image: AssetImage("assets/Edit24.png")),
+                            leading:
+                                Image(image: AssetImage("assets/Edit24.png")),
                             title: const Text(
                               "Update Menu",
                               style: TextStyle(color: Colors.white),
@@ -207,12 +217,12 @@ class _MainAppState extends ConsumerState<MainApp> {
                           ),
                           ListTile(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)
-                            ),
+                                borderRadius: BorderRadius.circular(5)),
                             tileColor: _isSelected[3]
                                 ? Color.fromARGB(255, 175, 145, 140)
                                 : null,
-                            leading: Image(image: AssetImage("assets/remove24.png")),
+                            leading:
+                                Image(image: AssetImage("assets/remove24.png")),
                             title: const Text(
                               "Delete Menu",
                               style: TextStyle(color: Colors.white),
@@ -229,27 +239,73 @@ class _MainAppState extends ConsumerState<MainApp> {
                     ),
                   ],
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                  child: Column(
-                    children: [
-                      Switch(
-                        thumbIcon: thumbIcon,
-                        value: ref.watch(isAPIMode),
-                        onChanged: (value) {
-                          setState(() {
-                            ref.read(isAPIMode.notifier).state = value;
-                            util.setIsApiMode(value);
-                          });
-                        },
+                Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: Column(
+                        children: [
+                          Switch(
+                            thumbIcon: thumbIcon,
+                            value: ref.watch(isAPIMode),
+                            onChanged: (value) {
+                              setState(() {
+                                ref.read(isAPIMode.notifier).state = value;
+                                util.setIsApiMode(value);
+                              });
+                            },
+                          ),
+                          Text(
+                            "Change to API Mode",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "Change to API Mode",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      // child: ElevatedButton(
+                      //   style: ElevatedButton.styleFrom(
+                      //     padding: EdgeInsets.symmetric(vertical: 10),
+                      //     backgroundColor: Color.fromARGB(255, 217, 193, 190),
+                      //     shape: RoundedRectangleBorder(
+                      //       borderRadius: BorderRadius.circular(5),
+                      //     ),
+                      //   ),
+                      //   child: Text(
+                      //     "Settings",
+                      //     style: TextStyle(fontSize: 16),
+                      //   ),
+                      //   onPressed: () {
+                      //     Navigator.pop(context);
+                      //     Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsScreen()));
+                      //   },
+                      // ),
+                      child: Builder(builder: (context) {
+                        return ListTile(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          tileColor: Color.fromARGB(255, 217, 193, 190),
+                          title: Text(
+                            "Settings",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SettingsScreen()));
+                          },
+                          trailing: Icon(Icons.settings),
+                        );
+                      }),
+                    ),
+                  ],
                 ),
               ],
             ),
