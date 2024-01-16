@@ -11,21 +11,22 @@ Language : English
 ## Description:
 Create Simple RESTful API with GO, Complete with simple Mobile and Desktop App
 
-The operating system I use: Windows 11\
-Required Software:
+The operating system I use: Windows 11
 
-- [x]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** API (Go/Gin,Gorm)
+## Requirements:
+
+- [x]  API (Go/Gin,Gorm)
     - ```go``` command installed on terminal ```(go1.20.7)```
     - Visual Studio Code
     - Go Extexsion *optional
-- [x]  **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Desktop App (C#/.NET 5) 
+- [x] Desktop App (C#/.NET 5) 
     - Visual Studio 2019
-- [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Mobile App (Dart/Flutter) 
-    - Latest version of Flutter has been installed ```(Flutter 3.10.5)```
+- [x] Mobile App (Dart/Flutter) 
+    - Latest version of Flutter has been installed ```(Flutter 3.10.5)``` or above
     - Flutter Extension *optional
-- [x] **[&nbsp;&nbsp;&nbsp;&nbsp; DONE &nbsp;&nbsp;&nbsp;&nbsp;]** Database (SQLServer) 
-    - SQL Server Management Studio 18
-    - Other? (maybe in future i'll add mariaDb(mysql), if I'm free, lol)
+- [x] Database (SQLServer) 
+    - SQL Server Management Studio 18 _(If your version is different from mine, maybe you can try it :p)_
+    - Other? (maybe in future i'll add mariaDb(mysql)? or i'll use Firebase for NoSQL database? if I'm free, lol)
 - Postman
 
 ## Feature
@@ -53,8 +54,6 @@ Take a peek 👀 <br>
 - [DATABASE] In your database, create database named  **db_Restaurant_Khip01** (or you can change the name in setup.go). Then Migrate it with ```go run main.go``` on your terminal.
 - [DESKTOP APP] You can open .sln file/run the installer app.
 - [MOBILE APP] Just run the application via vscode/android studio/terminal. ***Don't forget to change your API Endpoint in .env***
-
----
 
 > **IMPORTANT** \
 > [API NEEDS] There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
