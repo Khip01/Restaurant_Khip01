@@ -16,6 +16,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_dotenv: ^5.1.0
   flutter_riverpod: ^2.4.9
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +39,9 @@ flutter:
     - assets/DragLeft.jpg
     - assets/UndoLeft.jpg
     - .env
+    - assets/gitProfPic.jpg
+    - assets/githubIcon.png
+    - assets/linkedInIcon.png
   fonts:
     - family: Quicksand
       fonts: 
