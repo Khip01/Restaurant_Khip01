@@ -26,6 +26,8 @@ class MainApp extends ConsumerStatefulWidget {
 class _MainAppState extends ConsumerState<MainApp> {
   Util util = new Util();
 
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -115,6 +117,7 @@ class _MainAppState extends ConsumerState<MainApp> {
         scaffoldBackgroundColor: Color.fromARGB(255, 245, 245, 245),
       ),
       home: Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
@@ -173,7 +176,9 @@ class _MainAppState extends ConsumerState<MainApp> {
                               // Update the state of the app
                               onTaped(0);
                               // Then Close The Drawer
-                              // Navigator.pop(context);
+                              if (_scaffoldKey.currentState!.isDrawerOpen) {
+                                _scaffoldKey.currentState!.openEndDrawer();
+                              }
                             },
                           ),
                           ListTile(
@@ -193,7 +198,9 @@ class _MainAppState extends ConsumerState<MainApp> {
                               // Update the state of the app
                               onTaped(1);
                               // Then Close The Drawer
-                              // Navigator.pop(context);
+                              if (_scaffoldKey.currentState!.isDrawerOpen) {
+                                _scaffoldKey.currentState!.openEndDrawer();
+                              }
                             },
                           ),
                           ListTile(
@@ -212,7 +219,9 @@ class _MainAppState extends ConsumerState<MainApp> {
                               // Update the state of the app
                               onTaped(2);
                               // Then Close The Drawer
-                              // Navigator.pop(context);
+                              if (_scaffoldKey.currentState!.isDrawerOpen) {
+                                _scaffoldKey.currentState!.openEndDrawer();
+                              }
                             },
                           ),
                           ListTile(
@@ -231,7 +240,9 @@ class _MainAppState extends ConsumerState<MainApp> {
                               // Update the state of the app
                               onTaped(3);
                               // Then Close The Drawer
-                              // Navigator.pop(context);
+                              if (_scaffoldKey.currentState!.isDrawerOpen) {
+                                _scaffoldKey.currentState!.openEndDrawer();
+                              }
                             },
                           ),
                         ],
