@@ -44,9 +44,9 @@ class _ApiEndpointState extends State<ApiEndpoint> {
         title: Text("API Endpoint"),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        shape: Border(
-          bottom: BorderSide(color: Colors.black, width: 0.2),
-        ),
+        // shape: Border(
+        //   bottom: BorderSide(color: Colors.black, width: 0.2),
+        // ),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
@@ -63,7 +63,6 @@ class _ApiEndpointState extends State<ApiEndpoint> {
                   children: [
                     Text(
                       "Is your RESTful API endpoint different? \nOr do you have your own endpoint? \nYou can set it here",
-                      style: TextStyle(fontSize: 14),
                     ),
                     TextFormField(
                       autovalidateMode: AutovalidateMode.onUserInteraction,
