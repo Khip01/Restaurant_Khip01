@@ -30,12 +30,12 @@ class _ShowCreateMenuState extends ConsumerState<ShowCreateMenu> {
       ref.watch(isAPIMode) == true
           ? postMenuRequest(nameField.text, descField.text, int.parse(priceField.text))
           : () {
-            Map<dynamic, dynamic> sendData = {
+            Map<String, dynamic> sendData = {
               "menu_name": nameField.text,
               "description": descField.text,
               "price": priceField.text
             };
-            menuDummy.menu.add(sendData); // IDK why this didn't work , the data cannot be added
+            menuDummy.menu["All Menu"]!.add(sendData); // IDK why this didn't work , the data cannot be added
             debugPrint("Data added when data is ${ref.watch(isAPIMode)} with data send ${sendData}");
           }();
       util.setIsActiveIndex(0);
