@@ -129,7 +129,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Text(
-                                  menuDummy.menu[index]["menu_name"],
+                                  menuDummy.menu["All Menu"]![index]["menu_name"],
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
@@ -146,7 +146,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        menuDummy.menu[index]["description"],
+                                        menuDummy.menu["All Menu"]![index]["description"],
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
@@ -155,7 +155,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                                 ),
                                 Text(
                                   "Rp. " +
-                                      menuDummy.menu[index]["price"].toString(),
+                                      menuDummy.menu["All Menu"]![index]["price"].toString(),
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.lightGreen,
@@ -183,7 +183,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
 
     return ListView.builder(
       itemCount:
-          isApiMode ? snapshot?.data["All Menu"].length : menuDummy.menu.length,
+          isApiMode ? snapshot?.data["All Menu"].length : menuDummy.menu["All Menu"]!.length,
       itemBuilder: (BuildContext context, int index) {
         return Column(
           children: [
@@ -197,14 +197,14 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                 child: Dismissible(
                   key: Key(isApiMode
                       ? snapshot?.data["All Menu"][index]["menu_name"]
-                      : menuDummy.menu[index]["menu_name"]),
+                      : menuDummy.menu["All Menu"]![index]["menu_name"]),
                   onDismissed: (DismissDirection direction) {
                     if (isApiMode) {
                       waitDeleteMenu(snapshot!, index);
                     }
-                    Map? deletedMenu = isApiMode
+                    Map<String, dynamic>? deletedMenu = isApiMode
                         ? snapshot?.data["All Menu"][index]
-                        : menuDummy.menu.removeAt(index);
+                        : menuDummy.menu["All Menu"]!.removeAt(index);
                     ScaffoldMessenger.of(context)
                       ..removeCurrentSnackBar()
                       ..showSnackBar(
@@ -221,7 +221,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                                     deletedMenu["description"],
                                     deletedMenu["price"]);
                               } else {
-                                menuDummy.menu.insert(index, deletedMenu);
+                                menuDummy.menu["All Menu"]!.insert(index, deletedMenu);
                               }
                               ScaffoldMessenger.of(context)
                                 ..showSnackBar(
@@ -285,7 +285,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                         Text(
                           isApiMode
                               ? snapshot?.data["All Menu"][index]["menu_name"]
-                              : menuDummy.menu[index]["menu_name"],
+                              : menuDummy.menu["All Menu"]![index]["menu_name"],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
                         ),
@@ -302,7 +302,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                                 isApiMode
                                     ? snapshot?.data["All Menu"][index]
                                         ["description"]
-                                    : menuDummy.menu[index]["description"],
+                                    : menuDummy.menu["All Menu"]![index]["description"],
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -310,7 +310,7 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
                           ),
                         ),
                         Text(
-                          "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
+                          "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu["All Menu"]![index]["price"]}",
                           style: TextStyle(
                               fontSize: 14,
                               color: Colors.lightGreen,
