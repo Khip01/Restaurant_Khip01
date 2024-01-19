@@ -11,6 +11,33 @@ namespace restaurant_desktop_app
 {
     class Controller
     {
+        String api_endpoint = Properties.Settings.Default.api_endpoint;
+
+        // Check Menu Connection 
+        public async Task<bool> checkApiConnection(String newEndpoint)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(newEndpoint+"Menus");
+                    if(response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    } 
+                    else
+                    {
+                        return false;
+                    }
+                } 
+                catch (Exception er)
+                {
+                    // If Error
+                    throw er;
+                }
+            }
+        }
+
         // Get All Menus
         public async Task<MenuResponse> GetMenusDataAsync()
         {
@@ -21,7 +48,7 @@ namespace restaurant_desktop_app
             {
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://localhost:8081/api/Menus");
+                    HttpResponseMessage response = await client.GetAsync(api_endpoint+"Menus");
                     if (response.IsSuccessStatusCode)
                     {
                         // Read JSON from Response
@@ -46,10 +73,11 @@ namespace restaurant_desktop_app
             // Create new object that will become a Struct to return value
             MenuWrapper menuWrap = new MenuWrapper();
 
+
             using (HttpClient client = new HttpClient()){
                 try
                 {
-                    HttpResponseMessage response = await client.GetAsync("http://localhost:8081/api/Menu/"+id);
+                    HttpResponseMessage response = await client.GetAsync(api_endpoint+"Menu/"+id);
                     if (response.IsSuccessStatusCode)
                     {
                         // Read JSON from Response
@@ -81,7 +109,7 @@ namespace restaurant_desktop_app
                     var content = new StringContent(jsonMenu, Encoding.UTF8, "application/json");
 
                     // Send to API 
-                    HttpResponseMessage response = await client.PostAsync("http://localhost:8081/api/Menu", content);
+                    HttpResponseMessage response = await client.PostAsync(api_endpoint+"Menu", content);
                     if (!response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Failed to Create some data, check the misspelling textfield!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -113,7 +141,7 @@ namespace restaurant_desktop_app
                     var content = new StringContent(jsonMenu, Encoding.UTF8, "application/json");
 
                     // Try to send Content to Database through API 
-                    HttpResponseMessage response = await client.PutAsync("http://localhost:8081/api/Menu/"+id, content);
+                    HttpResponseMessage response = await client.PutAsync(api_endpoint+"Menu/"+id, content);
                     if (!response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Error: Can't Update the Data. \nThere is something wrong with your input", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -142,7 +170,7 @@ namespace restaurant_desktop_app
                 try
                 {
                     // Send to Delete Request to API 
-                    HttpResponseMessage response = await client.DeleteAsync("http://localhost:8081/api/Menu/"+id);
+                    HttpResponseMessage response = await client.DeleteAsync(api_endpoint+"Menu/"+id);
                     if (!response.IsSuccessStatusCode)
                     {
                         MessageBox.Show("Error: Failed to Delete data.\nThere is something wrong with the requested data.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
