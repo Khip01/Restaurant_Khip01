@@ -35,9 +35,9 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
 
   @override
   void initState() {
-    nameField.text = ref.read(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
-    descField.text = ref.read(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
-    priceField.text = ref.read(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
+    nameField.text = ref.read(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["menu_name"];
+    descField.text = ref.read(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["description"];
+    priceField.text = (ref.read(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["price"].toString())!;
     super.initState();
   }
 
@@ -45,14 +45,14 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
     if (ref.watch(isAPIMode) && isDataChanged) {
       updateMenuRequest(this.widget.menu?["id"], nameField.text, descField.text, int.parse(priceField.text));
     } else if (!ref.watch(isAPIMode) && isDataChanged){
-      Map updatedData = {
+      Map<String, dynamic> updatedData = {
         // {"menu_name": "Bakso", "description": "${lorem}", "price": "9999"},
         "menu_name": nameField.text,
         "description": descField.text,
         "price": priceField.text,
       };
       debugPrint("Updated with ${updatedData}");
-      menuDummy.menu[this.widget.indexMenu] = updatedData; // IDK why this is not make any change too :(
+      menuDummy.menu["All Menu"]![this.widget.indexMenu] = updatedData; // IDK why this is not make any change too :(
     }
     // Mengubah Index yang aktif
     setState(() {
@@ -70,9 +70,9 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
   }
 
   bool isFieldChanged () {
-    if (nameField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["menu_name"]) : (menuDummy.menu[this.widget.indexMenu]["menu_name"])) ||
-        descField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["description"]) : (menuDummy.menu[this.widget.indexMenu]["description"])) ||
-        priceField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["price"]).toString() : (menuDummy.menu[this.widget.indexMenu]["price"]))
+    if (nameField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["menu_name"]) : (menuDummy.menu["All Menu"]![this.widget.indexMenu]["menu_name"])) ||
+        descField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["description"]) : (menuDummy.menu["All Menu"]![this.widget.indexMenu]["description"])) ||
+        priceField.text != ((ref.watch(isAPIMode)) ? (this.widget.menu?["price"]).toString() : (menuDummy.menu["All Menu"]![this.widget.indexMenu]["price"]).toString())
     ) {
       return true;
     }
@@ -315,7 +315,7 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
                         });
                       _formKey.currentState!.validate();
                     } else {
-                      if ((menuDummy.menu[this.widget.indexMenu]["menu_name"] ==
+                      if ((menuDummy.menu["All Menu"]![this.widget.indexMenu]["menu_name"] ==
                               nameField.text) ||
                           value.isEmpty)
                         setState(() {
@@ -389,7 +389,7 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
                         });
                       _formKey.currentState!.validate();
                     } else {
-                      if ((menuDummy.menu[this.widget.indexMenu]
+                      if ((menuDummy.menu["All Menu"]![this.widget.indexMenu]
                                   ["description"] ==
                               descField.text) ||
                           value.isEmpty)
@@ -465,7 +465,7 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
                         });
                       _formKey.currentState!.validate();
                     } else {
-                      if ((menuDummy.menu[this.widget.indexMenu]["price"] ==
+                      if ((menuDummy.menu["All Menu"]![this.widget.indexMenu]["price"] ==
                               priceField.text) ||
                           value.isEmpty)
                         setState(() {
@@ -535,13 +535,13 @@ class _ShowUpdateMenuState extends ConsumerState<ShowUpdateMenu> {
                 onPressed: () {
                   setState(() {
                     nameField.text =
-                    ref.watch(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu[this.widget.indexMenu]["menu_name"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["menu_name"]) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["menu_name"];
                     nameIsWarning = false;
                     descField.text =
-                    ref.watch(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu[this.widget.indexMenu]["description"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["description"]) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["description"];
                     descIsWarning = false;
                     priceField.text =
-                    ref.watch(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu[this.widget.indexMenu]["price"];
+                    ref.watch(isAPIMode) ? (this.widget.menu?["price"].toString()) : menuDummy.menu["All Menu"]![this.widget.indexMenu]["price"];
                     priceIsWarning = false;
                   });
                   _formKey.currentState!.validate();
