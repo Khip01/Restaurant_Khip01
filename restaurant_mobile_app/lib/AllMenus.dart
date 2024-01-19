@@ -40,12 +40,29 @@ class _ClampingScrollBehavior extends ScrollBehavior {
 class _AllMenusState extends ConsumerState<AllMenus> {
   String filterValue = filterList.first;
 
+  sortData(String value, dynamic menuList) {
+    if (value == "a - z"){
+      menuList["All Menu"].sort((a, b) => a["menu_name"].toLowerCase().compareTo(b["menu_name"].toLowerCase()) as int);
+      return menuList;
+    } else if (value == "z - a") {
+      menuList["All Menu"].sort((a, b) => b["menu_name"].toLowerCase().compareTo(a["menu_name"].toLowerCase()) as int);
+      return menuList;
+    } else if (value == "cheapest"){
+      menuList["All Menu"].sort((a, b) => a["price"].compareTo(b["price"]) as int);
+      return menuList;
+    } else if (value == "highest price"){
+      menuList["All Menu"].sort((a, b) => b["price"].compareTo(a["price"]) as int);
+      return menuList;
+    } else { // latest
+      menuList["All Menu"].sort((a, b) => b["id"].compareTo(a["id"]) as int);
+      return menuList;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    Util util = Util();
-
     // initMode(); // Mengecek secara terus menerus kondisi dari isApiMode (Tetapi akan setState Terus ke Widget  dan mengakibatkan spam di permintaan request ke API getMenusRequest())
-    util.getApiAddress().then((value) => debugPrint("Get Request at ${value}"));
+    // util.getApiAddress().then((value) => debugPrint("Get Request at ${value}"));
     final isApiMode = ref.watch(isAPIMode);
 
     if (isApiMode) {
@@ -158,6 +175,7 @@ class _AllMenusState extends ConsumerState<AllMenus> {
 
   Widget AllMenuPage(bool isAPIMode, [AsyncSnapshot<dynamic>? snapshot]) {
     MenuDummy menuDummy = new MenuDummy(); // Dummy for menu
+    var menuList = sortData(filterValue, isAPIMode ? snapshot!.data : menuDummy.menu);
 
     return Container(
       height: double.maxFinite,
@@ -206,8 +224,8 @@ class _AllMenusState extends ConsumerState<AllMenus> {
                 flex: 5,
                 child: ListView.builder(
                   itemCount: isAPIMode == true
-                      ? snapshot?.data["All Menu"].length
-                      : menuDummy.menu.length,
+                      ? menuList["All Menu"].length
+                      : menuDummy.menu["All Menu"]!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
@@ -217,8 +235,8 @@ class _AllMenusState extends ConsumerState<AllMenus> {
                             builder: (context) {
                               return ShowMenu(
                                 menu: isAPIMode == true
-                                    ? snapshot?.data["All Menu"][index]
-                                    : menuDummy.menu[index], dataMenu: isAPIMode == true ? snapshot?.data : null,
+                                    ? menuList["All Menu"][index]
+                                    : menuDummy.menu["All Menu"]![index], dataMenu: isAPIMode == true ? menuList : null,
                                 isApiMode: isAPIMode,
                               );
                             },
@@ -241,27 +259,27 @@ class _AllMenusState extends ConsumerState<AllMenus> {
                               children: [
                                 Text(
                                   isAPIMode == true
-                                      ? snapshot?.data["All Menu"][index]
+                                      ? menuList["All Menu"][index]
                                           ["menu_name"]
-                                      : menuDummy.menu[index]["menu_name"],
+                                      : menuDummy.menu["All Menu"]![index]["menu_name"],
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
                                 Text(
                                   isAPIMode == true
-                                      ? snapshot?.data["All Menu"][index]
+                                      ? menuList["All Menu"][index]
                                           ["description"]
-                                      : menuDummy.menu[index]["description"],
+                                      : menuDummy.menu["All Menu"]![index]["description"],
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   "Rp. " +
                                       (isAPIMode == true
-                                              ? snapshot?.data["All Menu"]
+                                              ? menuList["All Menu"]
                                                   [index]["price"]
-                                              : menuDummy.menu[index]["price"])
+                                              : menuDummy.menu["All Menu"]![index]["price"])
                                           .toString(),
                                   style: TextStyle(
                                       fontSize: 14,
