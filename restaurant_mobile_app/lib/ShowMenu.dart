@@ -130,11 +130,11 @@ class ShowMenu extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: isApiMode == false
-            ? menuDummy.menu.length
+            ? menuDummy.menu["All Menu"]!.length
             : dataMenu?["All Menu"].length,
         itemBuilder: (BuildContext context, int i) {
           if ((isApiMode == false
-                  ? menuDummy.menu[i]["menu_name"]
+                  ? menuDummy.menu["All Menu"]![i]["menu_name"]
                   : dataMenu?["All Menu"][i]["menu_name"]) !=
               menu["menu_name"]) {
             return Padding(
@@ -146,7 +146,7 @@ class ShowMenu extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (value) => ShowMenu(
                           menu: isApiMode == false
-                              ? menuDummy.menu[i]
+                              ? menuDummy.menu["All Menu"]![i]
                               : dataMenu?["All Menu"][i],
                           isApiMode: isApiMode, dataMenu: dataMenu,),
                     ),
@@ -165,14 +165,14 @@ class ShowMenu extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           isApiMode == false
-                              ? menuDummy.menu[i]["menu_name"]
+                              ? menuDummy.menu["All Menu"]![i]["menu_name"]
                               : dataMenu?["All Menu"][i]["menu_name"],
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         Text(
                           isApiMode == false
-                              ? menuDummy.menu[i]["description"]
+                              ? menuDummy.menu["All Menu"]![i]["description"]
                               : dataMenu?["All Menu"][i]["description"],
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
@@ -180,7 +180,7 @@ class ShowMenu extends StatelessWidget {
                         Text(
                           "Rp. " +
                               (isApiMode == false
-                                      ? menuDummy.menu[i]["price"]
+                                      ? menuDummy.menu["All Menu"]![i]["price"]
                                       : dataMenu?["All Menu"][i]["price"])
                                   .toString(),
                           style: TextStyle(
