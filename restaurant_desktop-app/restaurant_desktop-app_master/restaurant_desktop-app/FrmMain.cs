@@ -171,6 +171,22 @@ namespace restaurant_desktop_app
             loadPage(new PageDelete());
             changeButtonColor(sender, e);
         }
+        private void btnSettings_Click(object sender, EventArgs e)
+        {
+            loadPage(new PageSettings());
+
+            // Reset Button Highlight
+            if (currentButton != null)
+            {
+                currentButton.BackColor = Color.Transparent; // Mengubah warna button
+                currentButton.Parent.BackColor = Color.Transparent; // Mengubah warna panel
+            }
+            // Update warna button menjadi transparan
+            btnAllMenu.BackColor = Color.Transparent;
+            btnCreate.BackColor = Color.Transparent;
+            btnUpdate.BackColor = Color.Transparent;
+            btnDelete.BackColor = Color.Transparent;
+        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -226,6 +242,7 @@ namespace restaurant_desktop_app
                 }
             }
         }
+
     }
 
 }

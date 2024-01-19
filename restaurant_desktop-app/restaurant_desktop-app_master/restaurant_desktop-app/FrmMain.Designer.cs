@@ -35,6 +35,8 @@ namespace restaurant_desktop_app
             this.btnMinimize = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlNavbar = new System.Windows.Forms.Panel();
+            this.pnlAbout = new System.Windows.Forms.Panel();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.pnlAboutPop = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -50,19 +52,18 @@ namespace restaurant_desktop_app
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCreate = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pnlAbout = new System.Windows.Forms.Panel();
-            this.btnAbout = new System.Windows.Forms.Button();
             this.pnlContent = new System.Windows.Forms.Panel();
             this.timerAbout = new System.Windows.Forms.Timer(this.components);
+            this.btnSettings = new System.Windows.Forms.Button();
             this.pnlTitle.SuspendLayout();
             this.pnlAction.SuspendLayout();
             this.pnlNavbar.SuspendLayout();
+            this.pnlAbout.SuspendLayout();
             this.pnlAboutPop.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.pnlAbout.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTitle
@@ -123,6 +124,7 @@ namespace restaurant_desktop_app
             // pnlNavbar
             // 
             this.pnlNavbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(178)))), ((int)(((byte)(169)))));
+            this.pnlNavbar.Controls.Add(this.pnlAbout);
             this.pnlNavbar.Controls.Add(this.pnlAboutPop);
             this.pnlNavbar.Controls.Add(this.panel4);
             this.pnlNavbar.Controls.Add(this.panel3);
@@ -134,6 +136,35 @@ namespace restaurant_desktop_app
             this.pnlNavbar.Size = new System.Drawing.Size(250, 556);
             this.pnlNavbar.TabIndex = 1;
             // 
+            // pnlAbout
+            // 
+            this.pnlAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(178)))), ((int)(((byte)(169)))));
+            this.pnlAbout.Controls.Add(this.btnAbout);
+            this.pnlAbout.Location = new System.Drawing.Point(10, 487);
+            this.pnlAbout.Margin = new System.Windows.Forms.Padding(10);
+            this.pnlAbout.Name = "pnlAbout";
+            this.pnlAbout.Size = new System.Drawing.Size(230, 59);
+            this.pnlAbout.TabIndex = 4;
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(223)))), ((int)(((byte)(217)))));
+            this.btnAbout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnAbout.FlatAppearance.BorderSize = 0;
+            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbout.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnAbout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnAbout.Image = global::restaurant_desktop_app.Properties.Resources.information32;
+            this.btnAbout.Location = new System.Drawing.Point(0, 0);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(230, 59);
+            this.btnAbout.TabIndex = 0;
+            this.btnAbout.Text = "about ";
+            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnAbout.UseVisualStyleBackColor = false;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // pnlAboutPop
             // 
             this.pnlAboutPop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(239)))), ((int)(((byte)(237)))));
@@ -142,7 +173,7 @@ namespace restaurant_desktop_app
             this.pnlAboutPop.Controls.Add(this.label3);
             this.pnlAboutPop.Controls.Add(this.label2);
             this.pnlAboutPop.Controls.Add(this.label1);
-            this.pnlAboutPop.Location = new System.Drawing.Point(10, 481);
+            this.pnlAboutPop.Location = new System.Drawing.Point(10, 480);
             this.pnlAboutPop.MaximumSize = new System.Drawing.Size(230, 147);
             this.pnlAboutPop.Name = "pnlAboutPop";
             this.pnlAboutPop.Size = new System.Drawing.Size(230, 0);
@@ -158,7 +189,7 @@ namespace restaurant_desktop_app
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 20);
             this.label5.TabIndex = 4;
-            this.label5.Text = "v1.0.2";
+            this.label5.Text = "v2.1.0";
             // 
             // label4
             // 
@@ -331,35 +362,6 @@ namespace restaurant_desktop_app
             this.lblTitle.TabIndex = 3;
             this.lblTitle.Text = "Khip01\r\nRestaurant";
             // 
-            // pnlAbout
-            // 
-            this.pnlAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(178)))), ((int)(((byte)(169)))));
-            this.pnlAbout.Controls.Add(this.btnAbout);
-            this.pnlAbout.Location = new System.Drawing.Point(39, 665);
-            this.pnlAbout.Margin = new System.Windows.Forms.Padding(10);
-            this.pnlAbout.Name = "pnlAbout";
-            this.pnlAbout.Size = new System.Drawing.Size(230, 59);
-            this.pnlAbout.TabIndex = 4;
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(223)))), ((int)(((byte)(217)))));
-            this.btnAbout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnAbout.FlatAppearance.BorderSize = 0;
-            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbout.Font = new System.Drawing.Font("Segoe UI Semibold", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAbout.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAbout.Image = global::restaurant_desktop_app.Properties.Resources.information32;
-            this.btnAbout.Location = new System.Drawing.Point(0, 0);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(230, 59);
-            this.btnAbout.TabIndex = 0;
-            this.btnAbout.Text = "about ";
-            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbout.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnAbout.UseVisualStyleBackColor = false;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
             // pnlContent
             // 
             this.pnlContent.BackColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -374,13 +376,28 @@ namespace restaurant_desktop_app
             this.timerAbout.Interval = 1;
             this.timerAbout.Tick += new System.EventHandler(this.timerAbout_Tick);
             // 
+            // btnSettings
+            // 
+            this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSettings.FlatAppearance.BorderSize = 0;
+            this.btnSettings.Image = global::restaurant_desktop_app.Properties.Resources.settings24;
+            this.btnSettings.Location = new System.Drawing.Point(1038, 58);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(115, 47);
+            this.btnSettings.TabIndex = 4;
+            this.btnSettings.Text = "Setting";
+            this.btnSettings.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1182, 753);
-            this.Controls.Add(this.pnlAbout);
+            this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.pnlNavbar);
@@ -391,13 +408,13 @@ namespace restaurant_desktop_app
             this.pnlTitle.ResumeLayout(false);
             this.pnlAction.ResumeLayout(false);
             this.pnlNavbar.ResumeLayout(false);
+            this.pnlAbout.ResumeLayout(false);
             this.pnlAboutPop.ResumeLayout(false);
             this.pnlAboutPop.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.pnlAbout.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -429,6 +446,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer timerAbout;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
 
