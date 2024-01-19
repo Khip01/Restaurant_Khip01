@@ -33,7 +33,7 @@ namespace restaurant_desktop_app
             this.lblTitle = new System.Windows.Forms.Label();
             this.pnlDgv = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblEndpoint = new System.Windows.Forms.Label();
             this.dgvMenu = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtPrice = new System.Windows.Forms.TextBox();
@@ -45,7 +45,7 @@ namespace restaurant_desktop_app
             this.lblMenuName = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblEndpoint2 = new System.Windows.Forms.Label();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.timerErrorField = new System.Windows.Forms.Timer(this.components);
@@ -70,7 +70,7 @@ namespace restaurant_desktop_app
             // 
             this.pnlDgv.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pnlDgv.Controls.Add(this.label1);
-            this.pnlDgv.Controls.Add(this.label2);
+            this.pnlDgv.Controls.Add(this.lblEndpoint);
             this.pnlDgv.Controls.Add(this.dgvMenu);
             this.pnlDgv.Location = new System.Drawing.Point(19, 80);
             this.pnlDgv.Margin = new System.Windows.Forms.Padding(10);
@@ -90,16 +90,16 @@ namespace restaurant_desktop_app
             this.label1.TabIndex = 10;
             this.label1.Text = "GET:";
             // 
-            // label2
+            // lblEndpoint
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(81, 10);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(278, 31);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "localhost:8081/api/Menus";
+            this.lblEndpoint.AutoSize = true;
+            this.lblEndpoint.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEndpoint.Location = new System.Drawing.Point(81, 10);
+            this.lblEndpoint.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
+            this.lblEndpoint.Name = "lblEndpoint";
+            this.lblEndpoint.Size = new System.Drawing.Size(278, 31);
+            this.lblEndpoint.TabIndex = 9;
+            this.lblEndpoint.Text = "localhost:8081/api/Menus";
             // 
             // dgvMenu
             // 
@@ -127,7 +127,7 @@ namespace restaurant_desktop_app
             this.panel1.Controls.Add(this.lblMenuName);
             this.panel1.Controls.Add(this.lblId);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.lblEndpoint2);
             this.panel1.Location = new System.Drawing.Point(19, 377);
             this.panel1.Margin = new System.Windows.Forms.Padding(10);
             this.panel1.Name = "panel1";
@@ -231,16 +231,16 @@ namespace restaurant_desktop_app
             this.label3.TabIndex = 12;
             this.label3.Text = "POST:";
             // 
-            // label4
+            // lblEndpoint2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(97, 10);
-            this.label4.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(450, 31);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "localhost:8081/api/Menu (with body JSON)";
+            this.lblEndpoint2.AutoSize = true;
+            this.lblEndpoint2.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblEndpoint2.Location = new System.Drawing.Point(97, 10);
+            this.lblEndpoint2.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
+            this.lblEndpoint2.Name = "lblEndpoint2";
+            this.lblEndpoint2.Size = new System.Drawing.Size(450, 31);
+            this.lblEndpoint2.TabIndex = 11;
+            this.lblEndpoint2.Text = "localhost:8081/api/Menu (with body JSON)";
             // 
             // btnCreate
             // 
@@ -312,7 +312,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel pnlDgv;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEndpoint;
         private System.Windows.Forms.DataGridView dgvMenu;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblDescription;
@@ -320,7 +320,7 @@ namespace restaurant_desktop_app
         private System.Windows.Forms.Label lblMenuName;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblEndpoint2;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.TextBox txtMenuName;

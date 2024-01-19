@@ -19,6 +19,9 @@ namespace restaurant_desktop_app
         // Declare Contoller 
         Controller controller = new Controller();
 
+        // Declare Endpoint
+        String api_endpoint = Properties.Settings.Default.api_endpoint;
+
         public PageCreate()
         {
             InitializeComponent();
@@ -26,6 +29,10 @@ namespace restaurant_desktop_app
 
         private async void PageCreate_Load(object sender, EventArgs e)
         {
+            // Load Endpoint Label
+            lblEndpoint.Text = api_endpoint + "Menus";
+            lblEndpoint2.Text = api_endpoint + "Menu (with body JSON)";
+
             // Take All Menu Object from API and then display to dataGridView
             MenuResponse menuResponse = await controller.GetMenusDataAsync();
             dgvMenu.DataSource = menuResponse.AllMenu;
