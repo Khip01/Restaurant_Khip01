@@ -21,6 +21,9 @@ namespace restaurant_desktop_app
         // Declare Controller
         Controller controller = new Controller();
 
+        // Declare Endpoint
+        String api_endpoint = Properties.Settings.Default.api_endpoint;
+
         public PageDelete()
         {
             InitializeComponent();
@@ -28,6 +31,10 @@ namespace restaurant_desktop_app
 
         private async void PageDelete_Load(object sender, EventArgs e)
         {
+            // Load Endpoint Label 
+            lblEndpoint.Text = api_endpoint + "Menus";
+            lblEndpoint2.Text = api_endpoint + "Menu/:id";
+
             // Get all of the menu from API and show to DataGridView
             MenuResponse menu = await controller.GetMenusDataAsync();
             dgvMenu.DataSource = menu.AllMenu;
