@@ -19,7 +19,11 @@ namespace restaurant_desktop_app
         int blinkCount = 0;
         string tempPrice;
 
+        // Declare Controller
         Controller controller = new Controller();
+
+        // Declare Endpoint
+        String api_endpoint = Properties.Settings.Default.api_endpoint;
 
         public PageUpdate()
         {
@@ -54,6 +58,10 @@ namespace restaurant_desktop_app
 
         private async void PageUpdate_Load(object sender, EventArgs e)
         {
+            // Load Endpoint Label 
+            lblEndpoint.Text = api_endpoint + "Menus";
+            lblEndpoint2.Text = api_endpoint + "Menu/:id";
+
             // Take All Menu from API 
             MenuResponse menuResponse = await controller.GetMenusDataAsync();
             dgvMenu.DataSource = menuResponse.AllMenu;
