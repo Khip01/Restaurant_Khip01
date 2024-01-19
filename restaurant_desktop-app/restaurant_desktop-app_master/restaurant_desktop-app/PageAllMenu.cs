@@ -15,7 +15,10 @@ namespace restaurant_desktop_app
 {
     public partial class PageAllMenu : Form
     {
+        // Declare Menu Controller
         Controller controller = new Controller();
+
+        String api_endpoint = Properties.Settings.Default.api_endpoint;
 
         public PageAllMenu()
         {
@@ -24,6 +27,10 @@ namespace restaurant_desktop_app
 
         private async void PageAllMenu_Load(object sender, EventArgs e)
         {
+            // Load Endpoint Label
+            lblEndpoint.Text = api_endpoint + "Menus";
+            lblEndpoint2.Text = api_endpoint + "Menu/:id";
+
             // Take the All Menu Object and use it in the datasource
             MenuResponse menuResponse = await controller.GetMenusDataAsync();
             dgvMenu.DataSource = menuResponse.AllMenu;
