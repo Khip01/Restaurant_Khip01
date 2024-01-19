@@ -205,7 +205,7 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
       child: ListView.builder(
         itemCount: isApiMode
             ? snapshot?.data["All Menu"].length
-            : menuDummy.menu.length,
+            : menuDummy.menu["All Menu"]!.length,
         itemBuilder: (BuildContext context, int index) {
           return Column(
             children: [
@@ -230,7 +230,8 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
                                 isApiMode
                                     ? snapshot?.data["All Menu"][index]
                                         ["menu_name"]
-                                    : menuDummy.menu[index]["menu_name"],
+                                    : menuDummy.menu["All Menu"]![index]
+                                        ["menu_name"],
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 20),
                               ),
@@ -248,7 +249,7 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
                                       isApiMode
                                           ? snapshot?.data["All Menu"][index]
                                               ["description"]
-                                          : menuDummy.menu[index]
+                                          : menuDummy.menu["All Menu"]![index]
                                               ["description"],
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
@@ -257,7 +258,7 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
                                 ),
                               ),
                               Text(
-                                "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu[index]["price"]}",
+                                "Rp. ${isApiMode ? snapshot?.data["All Menu"][index]["price"] : menuDummy.menu["All Menu"]![index]["price"]}",
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.lightGreen,
@@ -281,8 +282,12 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
                               Icons.edit_square,
                               color: Colors.brown,
                             ),
-                            onPressed: () => _showModalBottomSheet(context,
-                                index, isApiMode == true ? snapshot?.data["All Menu"][index] : menuDummy.menu[index]),
+                            onPressed: () => _showModalBottomSheet(
+                                context,
+                                index,
+                                isApiMode == true
+                                    ? snapshot?.data["All Menu"][index]
+                                    : menuDummy.menu["All Menu"]![index]),
                           ),
                         ),
                       )
@@ -392,7 +397,7 @@ class _UpdateMenuState extends ConsumerState<UpdateMenu> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                           child: Text(
-                            "Are You sure to Edit Menu ${(isApiMode) ? (menu?["menu_name"]) : (menuDummy.menu[index]["menu_name"])}?",
+                            "Are You sure to Edit Menu ${(isApiMode) ? (menu?["menu_name"]) : (menuDummy.menu["All Menu"]![index]["menu_name"])}?",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 24),
                             textAlign: TextAlign.center,
