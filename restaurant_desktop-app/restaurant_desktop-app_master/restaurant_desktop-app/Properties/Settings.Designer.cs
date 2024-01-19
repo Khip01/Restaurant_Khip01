@@ -22,5 +22,17 @@ namespace restaurant_desktop_app.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8081/api/")]
+        public string api_endpoint {
+            get {
+                return ((string)(this["api_endpoint"]));
+            }
+            set {
+                this["api_endpoint"] = value;
+            }
+        }
     }
 }
