@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R3d6+xjlofnpqo1NVhkaI2mRaIwMI+cKR2WsL7ZK5cO19GDxbA3II/igQ020Y5hNMXARxGWZtcV4Nk6G4P0epA==",
+  "dgSpecHash": "KvgWzXNh5yNAFmCF9v3IlA7rBYP0kGoybZatD0EDluHH75L/cKd+10sxjrYLzN2Mnf8VJWca17GXNNU4O2ehIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
+  "projectFilePath": "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\A AAKHIF ATHALLAH\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

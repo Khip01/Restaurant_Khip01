@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj": {}
+    "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj": {
+    "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj": {
       "version": "1.0.1",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
+        "projectUniqueName": "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
         "projectName": "restaurant_desktop-app",
-        "projectPath": "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
+        "projectPath": "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\restaurant_desktop-app.csproj",
         "packagesPath": "C:\\Users\\A AAKHIF ATHALLAH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A AAKHIF ATHALLAH\\source\\repos\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\obj\\",
+        "outputPath": "C:\\Users\\A AAKHIF ATHALLAH\\Desktop\\Restaurant_Khip01\\restaurant_desktop-app\\restaurant_desktop-app_master\\restaurant_desktop-app\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

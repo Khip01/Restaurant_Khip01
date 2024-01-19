@@ -16,6 +16,9 @@
     <Compile Update="PageDelete.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PageSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PageUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
