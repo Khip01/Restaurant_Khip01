@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Khip01 Custom File
+/restaurant_desktop-app/restaurant_desktop-app_master/Installer restaurant_desktop-app
+
 # User-specific files
 *.rsuser
 *.suo
