@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33328.57
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restaurant_desktop-app", "restaurant_desktop-app\restaurant_desktop-app.csproj", "{7C217E1D-EA8B-4001-BB2E-9363A085B4FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restaurant_desktop-app", "restaurant_desktop-app\restaurant_desktop-app.csproj", "{7C217E1D-EA8B-4001-BB2E-9363A085B4FE}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Installer restaurant_desktop-app", "Installer restaurant_desktop-app\Installer restaurant_desktop-app.vdproj", "{5E59C7CB-7A4D-4C85-A8FB-828C2FCEF551}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{7C217E1D-EA8B-4001-BB2E-9363A085B4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C217E1D-EA8B-4001-BB2E-9363A085B4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C217E1D-EA8B-4001-BB2E-9363A085B4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E59C7CB-7A4D-4C85-A8FB-828C2FCEF551}.Debug|Any CPU.ActiveCfg = Debug
+		{5E59C7CB-7A4D-4C85-A8FB-828C2FCEF551}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

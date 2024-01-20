@@ -31,7 +31,6 @@ C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\rest
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\bin\Debug\net5.0-windows\ref\restaurant_desktop-app.dll
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\bin\Debug\net5.0-windows\restaurant_desktop-app.pdb
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\bin\Debug\net5.0-windows\Newtonsoft.Json.dll
-C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop-app.csproj.AssemblyReference.cache
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.FrmMain.resources
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.PageAllMenu.resources
 C:\Users\A AAKHIF ATHALLAH\Desktop\Restaurant_Khip01\restaurant_desktop-app\restaurant_desktop-app_master\restaurant_desktop-app\obj\Debug\net5.0-windows\restaurant_desktop_app.PageCreate.resources
