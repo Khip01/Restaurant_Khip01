@@ -56,7 +56,7 @@ Take a peek 👀 <br>
 - **[DESKTOP APP]**
 - You can open .sln file and run project manually **OR** you can simply run the installer app **_(Installer restaurant_desktop-app.msi)_** in ```restaurant_desktop-app/Restaurant_App-Installer/``` folder.
 - **[MOBILE APP]**
-- Just run the application via vscode/android studio/terminal **OR** you can also check the **_.apk_** file in the [release assets](https://github.com/Khip01/Restaurant_Khip01/releases) section of this repo ***Don't forget to change your API Endpoint in .env***
+- Just run the application via vscode/android studio/terminal **OR** you can also check the **_.apk_** file in the [release assets](https://github.com/Khip01/Restaurant_Khip01/releases/tag/2.1.0) section of this repo ***Don't forget to change your API Endpoint in .env***
 
 > **IMPORTANT** \
 > [API NEEDS] There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
