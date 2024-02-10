@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:restaurant_mobile_app/data_dummy/carousel_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/menu_dummy.dart';
 import 'package:restaurant_mobile_app/data_dummy/type_menu_dummy.dart';
@@ -58,8 +59,39 @@ class _DeleteMenuState extends ConsumerState<DeleteMenu> {
   }
 
   Widget ErrorDeletePage() {
-    return SizedBox(
-      child: Text("Ini Error"),
+    return Container(
+      child: Stack(children: [
+        Positioned.fill(
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: Text(
+                      "404\nNOT FOUND",
+                      textAlign: TextAlign.center,
+                      style:
+                      TextStyle(fontWeight: FontWeight.w900, fontSize: 30),
+                    )),
+                SvgPicture.asset(
+                  'assets/NotFound.svg',
+                  semanticsLabel: 'Not Found 404',
+                  width: 300,
+                ),
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                    child: Text(
+                      "Failed to load the data, check the API connection!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+              ],
+            ),
+          ),
+        ),
+      ]),
     );
   }
 
