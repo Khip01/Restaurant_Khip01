@@ -58,7 +58,7 @@ Take a peek 👀 <br>
 - **[MOBILE APP]**
 - Just run the application via vscode/android studio/terminal **OR** you can also check the **_.apk_** file in the [release assets](https://github.com/Khip01/Restaurant_Khip01/releases/tag/2.1.0) section of this repo ***Don't forget to change your API Endpoint in .env***
 
-> **IMPORTANT** \
+> [!CAUTION]
 > [API NEEDS] There is important to change your datasource(dsn) address in ```setup.go``` file, according to your needs. 
 
 # Use
